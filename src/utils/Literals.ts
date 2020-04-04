@@ -1,1 +1,1 @@
-export const STORED_SETTINGS ='settings';
+export const STORED_SETTINGS ='everything-book settings';

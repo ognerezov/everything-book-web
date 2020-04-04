@@ -1,9 +1,10 @@
 import React from 'react';
+import LayersViewer from "./components/viewers/LayersViewer";
 
 function App() {
   return (
     <div className="App">
-      test
+      <LayersViewer/>
     </div>
   );
 }

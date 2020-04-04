@@ -7,7 +7,9 @@ export default function (book : Book ={},action : BookAction): Book {
             default:
                 return book;
             case BookOperation.Get:
-                newBook[action.chapter.number] = action.chapter;
+                for(let i=0; i<action.chapters.length; i++){
+                    newBook[action.chapters[i].number] = action.chapters[i];
+                }
             return newBook;
         }
 }
