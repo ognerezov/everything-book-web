@@ -17,11 +17,10 @@ const ChapterViewer : FC<ChapterViewerProps> = props => {
     }
 
     return <div className='page bp3-running-text'>
-        {
-            props.chapter ? <div>
+        {props.chapter ?
+            <div>
                 {props.chapter?.records.map((record, index)=><RecordViewer record={record} key={index}/> )}
-            </div> : loading()
-        }
+            </div> : loading()}
     </div>
 };
 
