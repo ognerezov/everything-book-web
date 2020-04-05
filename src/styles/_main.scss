@@ -1,6 +1,29 @@
+@import "../../node_modules/@blueprintjs/core/lib/scss/variables";
 .auto-margin{
   margin: auto;
 }
 .App{
 
+}
+
+$page-color : #FFFDFB;
+@media only screen and (orientation: portrait) {
+  .page{
+    width: 100vw;
+    height: 100vh;
+    padding: 1vh 1vw;
+    background-color: $page-color;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+}
+@media only screen and (orientation: landscape) {
+  .page{
+    width: 100vw;
+    height: 100vh;
+    padding: 2vh 25vw;
+    background-color: $page-color;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
 }

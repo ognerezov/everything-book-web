@@ -1,0 +1,17 @@
+.n, .n-disabled{
+  display: inline;
+  padding: 0 0.1em !important;
+  color: #0E5A8A;
+  font-weight: bold;
+}
+.n-disabled{
+  display: inline;
+  padding: 0 0.1em !important;
+  color: #202B33;
+  font-weight: bold;
+}
+.n:hover{
+  cursor: pointer;
+  background-color: #0E5A8A;
+  color: $page-color;
+}

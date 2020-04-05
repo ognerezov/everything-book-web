@@ -2,7 +2,7 @@ export interface Book {
     [key :number] : Chapter;
 }
 export interface Chapter extends LevelFragment{
-    number : number;
+    level : number;
     records : Record[];
 }
 
@@ -11,11 +11,27 @@ export interface Record extends LevelFragment{
 }
 
 export interface LevelFragment {
+    number : number;
     type : string;
-    level : number;
 }
 
 export interface Span {
     text : string,
-    isNumber : boolean
+    number : boolean
+}
+
+export const LEVEL = 'level';
+export const CHAPTER = 'chapter';
+export const FORMULA = 'formula';
+export const RULE = 'rule';
+export const QUOTATION = 'quotation';
+export const POEM = 'poem';
+export const REGULAR = 'regular';
+
+export const MIN_CHAPTER = 1;
+export const MAX_CHAPTER = 300;
+
+export function isNumberDisabled(record : Record, str : string) {
+    const number = Number(str);
+    return number === record.number || number < MIN_CHAPTER || number > MAX_CHAPTER;
 }
