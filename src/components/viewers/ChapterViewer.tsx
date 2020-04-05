@@ -1,7 +1,9 @@
 import React, {FC} from "react";
 import {Chapter} from "../../model/Book";
-import {Callout, Intent,  Spinner} from "@blueprintjs/core";
+import {Callout, Card, Intent, Spinner} from "@blueprintjs/core";
 import {RecordViewer} from "./RecordViewer";
+import {Elevation} from "@blueprintjs/core/lib/esm/common/elevation";
+import ChapterBottom from "../controls/ChapterBottom";
 
 
 interface ChapterViewerProps {
@@ -18,9 +20,10 @@ const ChapterViewer : FC<ChapterViewerProps> = props => {
 
     return <div className='page bp3-running-text'>
         {props.chapter ?
-            <div>
+            <Card interactive={false}  elevation={Elevation.TWO} className='page-content'>
                 {props.chapter?.records.map((record, index)=><RecordViewer record={record} key={index}/> )}
-            </div> : loading()}
+            </Card> : loading()}
+            <ChapterBottom/>
     </div>
 };
 

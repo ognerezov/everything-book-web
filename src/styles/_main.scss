@@ -7,23 +7,79 @@
 }
 
 $page-color : #FFFDFB;
+$content-width-portrait : 98vw;
+
+$x-margin-portrait : 1vw;
+$y-margin: 1vh;
+
+$tool-height-portrait : 5vh;
+
+$base-height : 100vh;
+$base-width : 100vw;
+$tool-top-portrait : $base-height - $tool-height-portrait;
+
 @media only screen and (orientation: portrait) {
   .page{
     width: 100vw;
     height: 100vh;
-    padding: 1vh 1vw;
+    padding: $y-margin $x-margin-portrait $tool-height-portrait $x-margin-portrait;
     background-color: $page-color;
     overflow-y: auto;
     overflow-x: hidden;
   }
+  .page-content{
+    width: $base-width;
+    margin: $y-margin $x-margin-portrait $tool-height-portrait $x-margin-portrait ;
+  }
+  .page-tool{
+    background-color: $page-color;
+    overflow-y: hidden;
+    overflow-x: auto;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    position: fixed;
+    width: $content-width-portrait ;
+    top: $tool-top-portrait;
+    height: $tool-height-portrait;
+  }
+  .page-bottom--button{
+    flex: 0 0 39%;
+    margin: 0.5%;
+  }
 }
+
+$content-width-landscape : 50vw;
+$x-margin-landscape : 25vw;
+$tool-height-landscape : 4vh;
 @media only screen and (orientation: landscape) {
   .page{
     width: 100vw;
-    height: 100vh;
-    padding: 2vh 25vw;
+    height: $base-height;
+    padding: $tool-height-landscape  $x-margin-landscape $y-margin $x-margin-landscape;
     background-color: $page-color;
     overflow-y: auto;
     overflow-x: hidden;
+  }
+  .page-tool{
+    background-color: $page-color;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    width: $content-width-landscape;
+    margin: 0 $x-margin-portrait ;
+    height: $tool-height-landscape ;
+    top: 0;
+    position: fixed;
+  }
+  .page-content{
+    width: $content-width-landscape;
+    margin: $y-margin 0;
+  }
+  .page-bottom--button{
+    flex: 0 0 19%;
+    margin: 0.5%;
   }
 }

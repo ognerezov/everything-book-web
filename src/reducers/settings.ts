@@ -9,6 +9,9 @@ export default function (settings : Settings = {layers: [1]}, action: SettingsAc
         case SettingsOperation.View:
             layers.push(action.number);
             return {...settings,layers};
+        case SettingsOperation.Shift:
+            layers[layers.length-1] += action.number;
+            return {...settings,layers};
         case SettingsOperation.Close:
             if(layers.length > 1){
                 layers.pop();
