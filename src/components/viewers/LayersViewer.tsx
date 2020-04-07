@@ -25,7 +25,7 @@ class LayersViewer extends PureComponent<LayersViewerProps>{
 
     render() {
         return <div>
-            <ChapterViewer chapter={this.props.chapter}/>
+            <ChapterViewer chapter={this.props.chapter} closable={this.props.layers.length >1}/>
         </div>
     }
 }

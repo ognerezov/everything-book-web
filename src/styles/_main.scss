@@ -6,6 +6,23 @@
 
 }
 
+.closable{
+  position: relative;
+}
+.closable-content{
+  position: absolute;
+  max-height: 95%;
+  width: 100%;
+  top: 5%;
+}
+.closable-close-button{
+  position: absolute;
+  height: 4%;
+  width: 4%;
+  top : 1%;
+  left: 95%;
+}
+
 $page-color : #FFFDFB;
 $content-width-portrait : 98vw;
 
@@ -17,7 +34,7 @@ $tool-height-portrait : 5vh;
 $base-height : 100vh;
 $base-width : 100vw;
 $tool-top-portrait : $base-height - $tool-height-portrait;
-
+$close-button-right-landscape : $content-width-portrait + $x-margin-portrait;
 @media only screen and (orientation: portrait) {
   .page{
     width: 100vw;
@@ -28,8 +45,14 @@ $tool-top-portrait : $base-height - $tool-height-portrait;
     overflow-x: hidden;
   }
   .page-content{
-    width: $base-width;
-    margin: $y-margin $x-margin-portrait $tool-height-portrait $x-margin-portrait ;
+    width: $content-width-portrait;
+    margin: $y-margin 0 $tool-height-portrait 0 ;
+  }
+  .close-button{
+    position: absolute;
+    left: $close-button-right-landscape;
+    top: $y-margin;
+    transform: translate(-100%,50%);
   }
   .page-tool{
     background-color: $page-color;
@@ -52,6 +75,7 @@ $tool-top-portrait : $base-height - $tool-height-portrait;
 $content-width-landscape : 50vw;
 $x-margin-landscape : 25vw;
 $tool-height-landscape : 4vh;
+$close-button-right-landscape : $content-width-landscape + $x-margin-landscape;
 @media only screen and (orientation: landscape) {
   .page{
     width: 100vw;
@@ -60,6 +84,12 @@ $tool-height-landscape : 4vh;
     background-color: $page-color;
     overflow-y: auto;
     overflow-x: hidden;
+  }
+  .close-button{
+    position: absolute;
+    left: $close-button-right-landscape;
+    top: $tool-height-landscape;
+    transform: translate(-100%,50%);
   }
   .page-tool{
     background-color: $page-color;

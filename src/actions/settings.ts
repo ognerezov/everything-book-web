@@ -25,10 +25,10 @@ export function shiftChapter(number :number) :SettingsAction {
     }
 }
 
-export function closeChapter(number : number) :SettingsAction {
+export function closeChapter() :SettingsAction {
     return {
         type : SettingsOperation.Close,
-        number
+        number : -1
     }
 }
 
