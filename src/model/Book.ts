@@ -29,7 +29,7 @@ export const POEM = 'poem';
 export const REGULAR = 'regular';
 
 export const MIN_CHAPTER = 1;
-export const MAX_CHAPTER = 300;
+export const MAX_CHAPTER = 231;
 
 export function isNumberDisabled(record : Record, str : string) {
     const number = Number(str);

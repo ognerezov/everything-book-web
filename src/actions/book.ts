@@ -2,8 +2,7 @@ import {Chapter} from "../model/Book";
 import {Action} from "redux";
 
 export enum BookOperation {
-    Get
-
+    Get='get'
 }
 
 export interface BookAction extends Action<BookOperation>{

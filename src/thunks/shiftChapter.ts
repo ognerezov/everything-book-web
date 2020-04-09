@@ -4,8 +4,7 @@ import {Action} from "redux";
 import {Book} from "../model/Book";
 import {shiftChapter} from "../actions/settings";
 import {saveSettings} from "../service/LocalStorage";
-import {gotChapters} from "../actions/book";
-import {getChaptersAsync} from "../dao/BookRepository";
+import {proceedGetChapter} from "./getChapter";
 
 export const nextChapter= (): ThunkAction<void, AppState, null, Action> => async (dispatch,getState) => {
     dispatch(shiftChapter(1));
@@ -14,9 +13,7 @@ export const nextChapter= (): ThunkAction<void, AppState, null, Action> => async
     saveSettings(getState().settings);
     const number = layers[layers.length-1];
     if(!book[number]){
-        dispatch(
-            gotChapters(
-                await getChaptersAsync([number])));
+        await proceedGetChapter([number],dispatch,getState);
     }
 };
 
@@ -27,8 +24,6 @@ export const previousChapter= (): ThunkAction<void, AppState, null, Action> => a
     saveSettings(getState().settings);
     const number = layers[layers.length-1];
     if(!book[number]){
-        dispatch(
-            gotChapters(
-                await getChaptersAsync([number])));
+        await proceedGetChapter([number],dispatch,getState);
     }
 };

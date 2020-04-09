@@ -3,11 +3,43 @@ import {AppState} from "../store/configureStore";
 import {Action} from "redux";
 import {gotChapters} from "../actions/book";
 import {getChaptersAsync} from "../dao/BookRepository";
-
+import {setTemporalPassword} from "../actions/user";
+import {onException,onProcess} from "../actions/error";
+import {saveUser} from "../service/LocalStorage";
+import {setUserLoggedIn,setUserLoggedOut} from "../actions/user";
 
 export const getChapters =(numbers : number[]): ThunkAction<void, AppState, null, Action> => async (dispatch,getState) => {
     const filtered = numbers.filter(n=>!getState().book[n]);
-        dispatch(
-            gotChapters(
-                await getChaptersAsync(filtered)));
+    await proceedGetChapter(filtered,dispatch,getState);
 };
+
+export const getCurrentChapters =(): ThunkAction<void, AppState, null, Action> => async (dispatch,getState) => {
+    const filtered = getState().settings.layers.filter(n=>!getState().book[n]);
+    await proceedGetChapter(filtered,dispatch,getState);
+};
+
+export const enterCodeAndGetChapters =(accessCode : string): ThunkAction<void, AppState, null, Action> => async (dispatch,getState) => {
+    dispatch(setTemporalPassword(accessCode));
+    const filtered = getState().settings.layers.filter(n=>!getState().book[n]);
+    await proceedGetChapter(filtered,dispatch,getState);
+    if(getState().user.accessCode) {
+        dispatch(setUserLoggedIn());
+        saveUser(getState().user);
+    }
+};
+
+export async function proceedGetChapter(numbers : number [],dispatch : any, getState : any) {
+    dispatch(onProcess());
+    try {
+        dispatch(gotChapters(await getChaptersAsync(numbers,getState().user.accessCode)));
+    }catch (e) {
+        if(e.status === 401 || !getState().user.isLoggedIn){
+            dispatch(setUserLoggedOut());
+            saveUser(getState().user);
+        } else{
+            console.log(e);
+        }
+        dispatch(onException(e.status,e.message));
+    }
+
+}

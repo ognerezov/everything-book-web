@@ -1,0 +1,29 @@
+
+$process-width-portrait : 98vw;
+$process-width-landscape : 30vw;
+$process-margin-landscape : 35vw;
+
+@media only screen and (orientation: portrait) {
+  .process-container--holder{
+    width: $process-width-portrait;
+  }
+  .process-container {
+    position: fixed;
+    top: 10vh;
+    left: 0;
+    margin: $y-margin $x-margin-portrait;
+    width: $process-width-portrait;
+  }
+}
+@media only screen and (orientation: landscape) {
+  .process-container--holder{
+    width: $process-width-landscape;
+  }
+  .process-container {
+    position: fixed;
+    top: 25vh;
+    left: 0;
+    margin: $y-margin $process-margin-landscape;
+    width: $process-width-landscape;
+  }
+}
