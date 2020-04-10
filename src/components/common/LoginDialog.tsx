@@ -6,6 +6,7 @@ import {noException} from "../../actions/error";
 import {connect} from "react-redux";
 import {enterCodeAndGetChapters} from "../../thunks/getChapter";
 import ProcessInfo from "./ProcessInfo";
+import {accessCode, inputAccessCode, V} from "../../vocabulary/Vocabulary";
 
 interface LoginDialogProps {
     user : User;
@@ -39,11 +40,11 @@ class LoginDialog extends PureComponent<LoginDialogProps,LoginDialogState>{
             <ProcessInfo/>
             <div className="bp3-dialog-body">
                 <FormGroup
-                    label='Код доступа:'
+                    label={V[accessCode]}
                 >
                     <InputGroup
                         className="login-fields"
-                        placeholder={'Введите код доступа'}
+                        placeholder={V[inputAccessCode]}
                         rightElement={<Button icon='log-in' onClick={this.handleLoginAttempt} minimal={true}>Войти </Button>}
                         onChange={(event : React.FormEvent<HTMLInputElement>)=>
                         {this.setAccessCode(event.currentTarget.value);

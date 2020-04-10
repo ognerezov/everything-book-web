@@ -1,11 +1,12 @@
 import React, {FC} from "react";
 import {Chapter} from "../../model/Book";
-import {Button, Callout, Card, Intent, Spinner} from "@blueprintjs/core";
+import {Button, Card, Intent} from "@blueprintjs/core";
 import {RecordViewer} from "./RecordViewer";
 import {Elevation} from "@blueprintjs/core/lib/esm/common/elevation";
 import ChapterBottom from "../controls/ChapterBottom";
 import {closeChapter} from "../../actions/settings";
 import {connect} from "react-redux";
+import ProcessInfo from "../common/ProcessInfo";
 
 
 interface ChapterViewerProps {
@@ -15,12 +16,6 @@ interface ChapterViewerProps {
 }
 
 const ChapterViewer : FC<ChapterViewerProps> = props => {
-    console.log(props.chapter);
-    function loading() {
-        return <Callout intent={Intent.PRIMARY} title={'title'} className='page-content'>
-            <Spinner size={Spinner.SIZE_LARGE} intent={Intent.PRIMARY} />
-        </Callout>
-    }
 
     return <div className='page bp3-running-text'>
         {props.chapter ?
@@ -29,7 +24,8 @@ const ChapterViewer : FC<ChapterViewerProps> = props => {
                 <div >
                     {props.chapter?.records.map((record, index)=><RecordViewer record={record} key={index}/> )}
                 </div>
-            </Card> : loading()}
+            </Card> :
+            <ProcessInfo/>}
             <ChapterBottom/>
     </div>
 };

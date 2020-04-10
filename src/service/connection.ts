@@ -21,7 +21,7 @@ export function get(url : string): Promise<ConnectionResponse>  {
 }
 
 export function post(url : string, msg : string): Promise<ConnectionResponse>    {
-    return sendAsync(Method.POST, url,msg);
+    return sendAsync(Method.POST, url,msg,undefined,DEFAULT_CONTENT_TYPE,0);
 }
 
 export function sendAsync(method : Method, url : string, message : BodyInit|undefined = undefined,
