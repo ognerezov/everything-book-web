@@ -5,6 +5,13 @@ export interface Vocabulary {
 export const V : Vocabulary={
     accessCode: 'Код доступа:',
     inputAccessCode : 'Введите код доступа',
+
+    searchNumber : 'Поиск числа',
+    inputNumber : 'Введите число',
+    search : 'Поиск',
+    login : 'Войти',
+    numberOutOfRange : 'Число за пределами текущих знаний системы',
+
     exception : 'Ошибка',
     server_unreachable : 'Не удалось связаться с сервером',
     no_network : 'Отсутствует соединение с сетью или сервер недоступен',
@@ -33,6 +40,13 @@ export const V : Vocabulary={
     operation_time_out : 'Превышено время ожидания',
     server_time_out : 'Ответ от сервера не был получен в течении допустимого времени.',
 };
+
+export const searchNumber = 'searchNumber';
+export const inputNumber = 'inputNumber';
+export const search = 'search';
+export const login = 'login';
+export const numberOutOfRange = 'numberOutOfRange';
+
 export const accessCode=  'accessCode';
 export const inputAccessCode = 'inputAccessCode';
 export const exception = 'exception';

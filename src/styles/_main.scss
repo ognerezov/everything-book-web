@@ -66,9 +66,16 @@ $close-button-right-landscape : $content-width-portrait + $x-margin-portrait;
     top: $tool-top-portrait;
     height: $tool-height-portrait;
   }
-  .page-bottom--button{
+  .page-tool--button{
     flex: 0 0 39%;
-    margin: 0.5%;
+    margin: 0.5% 0;
+  }
+  .page-tool-menu-button{
+    position: fixed;
+    top: $tool-top-portrait;
+    left: 0;
+    width: $tool-height-portrait;
+    margin: $y-margin $x-margin-portrait;
   }
 }
 
@@ -108,8 +115,24 @@ $close-button-right-landscape : $content-width-landscape + $x-margin-landscape;
     width: $content-width-landscape;
     margin: $y-margin 0;
   }
-  .page-bottom--button{
+  .page-tool--button{
     flex: 0 0 19%;
     margin: 0.5%;
+  }
+  .page-tool-menu-button{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: $tool-height-landscape;
+    margin: $y-margin $x-margin-landscape ;
+  }
+
+  .page-tool-extension{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: $x-margin-landscape - 1vw;
+    margin: 0;
+    height: 100vh;
   }
 }

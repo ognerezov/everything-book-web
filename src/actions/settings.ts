@@ -4,7 +4,8 @@ export enum SettingsOperation {
     View = "view",
     Close ="close",
     Collapse ="collapse",
-    Shift = "shift"
+    Shift = "shift",
+    Set = "Set"
 }
 
 export interface SettingsAction extends Action<SettingsOperation>{
@@ -21,6 +22,13 @@ export function viewChapter(number : number) :SettingsAction {
 export function shiftChapter(number :number) :SettingsAction {
     return {
         type : SettingsOperation.Shift,
+        number
+    }
+}
+
+export function setChapter(number :number) :SettingsAction {
+    return {
+        type : SettingsOperation.Set,
         number
     }
 }

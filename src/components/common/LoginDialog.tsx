@@ -6,7 +6,7 @@ import {noException} from "../../actions/error";
 import {connect} from "react-redux";
 import {enterCodeAndGetChapters} from "../../thunks/getChapter";
 import ProcessInfo from "./ProcessInfo";
-import {accessCode, inputAccessCode, V} from "../../vocabulary/Vocabulary";
+import {accessCode, inputAccessCode, login, V} from "../../vocabulary/Vocabulary";
 
 interface LoginDialogProps {
     user : User;
@@ -45,7 +45,7 @@ class LoginDialog extends PureComponent<LoginDialogProps,LoginDialogState>{
                     <InputGroup
                         className="login-fields"
                         placeholder={V[inputAccessCode]}
-                        rightElement={<Button icon='log-in' onClick={this.handleLoginAttempt} minimal={true}>Войти </Button>}
+                        rightElement={<Button icon='log-in' onClick={this.handleLoginAttempt} minimal={true}>{V[login]} </Button>}
                         onChange={(event : React.FormEvent<HTMLInputElement>)=>
                         {this.setAccessCode(event.currentTarget.value);
                             this.props.noException()}}

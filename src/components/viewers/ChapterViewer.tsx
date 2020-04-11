@@ -3,10 +3,10 @@ import {Chapter} from "../../model/Book";
 import {Button, Card, Intent} from "@blueprintjs/core";
 import {RecordViewer} from "./RecordViewer";
 import {Elevation} from "@blueprintjs/core/lib/esm/common/elevation";
-import ChapterBottom from "../controls/ChapterBottom";
 import {closeChapter} from "../../actions/settings";
 import {connect} from "react-redux";
 import ProcessInfo from "../common/ProcessInfo";
+import ChapterTools from "../controls/ChapterTools";
 
 
 interface ChapterViewerProps {
@@ -26,7 +26,7 @@ const ChapterViewer : FC<ChapterViewerProps> = props => {
                 </div>
             </Card> :
             <ProcessInfo/>}
-            <ChapterBottom/>
+            <ChapterTools/>
     </div>
 };
 
