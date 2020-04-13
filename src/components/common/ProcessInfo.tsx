@@ -8,6 +8,7 @@ import {ExceptionViewInfo, getExceptionViewInfo} from "../../model/ExceptionView
 
 interface ProcessInfoProps {
    error : Exception;
+   className ?: string;
 }
 
 const ProcessInfo :FC<ProcessInfoProps> = props => {
@@ -18,13 +19,12 @@ const ProcessInfo :FC<ProcessInfoProps> = props => {
     function getError(error: Exception) {
         const viewInfo : ExceptionViewInfo = getExceptionViewInfo(error);
         return <Callout
-            // intent={viewInfo.intent}
                                         icon={viewInfo.icon}
                                         title={V[viewInfo.title]}> {V[viewInfo.message]}</Callout>
     }
 
     return props.error.type === ExceptionType.NoException ? null :
-        <Card elevation={Elevation.ZERO} interactive={true} className='process-container'>
+        <Card elevation={Elevation.ZERO} interactive={true} className={props.className}>
             {props.error.type === ExceptionType.Processing ? getProgressBar(): getError(props.error)}
         </Card>
 };

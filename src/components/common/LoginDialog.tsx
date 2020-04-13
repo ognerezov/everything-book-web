@@ -37,7 +37,7 @@ class LoginDialog extends PureComponent<LoginDialogProps,LoginDialogState>{
             isOpen={!isLoggedIn(this.props.user)}
             canEscapeKeyClose={false}
             canOutsideClickClose={false}>
-            <ProcessInfo/>
+            <ProcessInfo className='process-container'/>
             <div className="bp3-dialog-body">
                 <FormGroup
                     label={V[accessCode]}
