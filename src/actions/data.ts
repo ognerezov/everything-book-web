@@ -1,0 +1,16 @@
+import {Action} from "redux";
+
+export enum DataType {
+    GotRules = "getRules"
+}
+
+export interface DataAction extends Action<DataType>{
+    data : string;
+}
+
+export function gotData(type : DataType, data : string):DataAction {
+     return {
+         type,
+         data
+     }
+}

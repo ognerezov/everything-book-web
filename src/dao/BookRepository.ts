@@ -4,7 +4,7 @@ import {Chapter} from "../model/Book";
 // const CLOUDFRONT_URL="https://dkgst0c5d57yn.cloudfront.net/";
 // const EXTENSION = ".json";
 //const DEV_PASSWORD ='dev';
-const FIREBASE_CLOUD_FUNCTION_URL='https://europe-west3-everything-book.cloudfunctions.net/getChapters';
+const FIREBASE_GET_CHAPTER_URL='https://europe-west3-everything-book.cloudfunctions.net/getChapters';
 
 // export function getChapterAsync(number:number) : Promise<Chapter> {
 //     const url = CLOUDFRONT_URL + number +EXTENSION;
@@ -20,7 +20,7 @@ const FIREBASE_CLOUD_FUNCTION_URL='https://europe-west3-everything-book.cloudfun
 // }
 
 export function getChaptersAsync(numbers:number[], password ?: string) : Promise<Chapter[]> {
-    const url = FIREBASE_CLOUD_FUNCTION_URL;
+    const url = FIREBASE_GET_CHAPTER_URL;
     const msg = JSON.stringify({
        'password' : password,
        numbers

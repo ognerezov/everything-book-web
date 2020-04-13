@@ -8,6 +8,7 @@ import {Position} from "@blueprintjs/core/lib/esm/common/position";
 import {isPortrait} from "../../service/MediaInfo";
 import {inputNumber, numberOutOfRange, search, searchNumber, V} from "../../vocabulary/Vocabulary";
 import {toast} from "../../service/toaster";
+import RulesViewer from "../viewers/RulesViewer";
 
 interface ChapterToolsProps {
     nextChapter : any;
@@ -76,10 +77,12 @@ class ChapterTools extends PureComponent<ChapterToolsProps,ChapterToolsState>{
                         canOutsideClickClose={true} onClose={this.handleExpandAndCollapse} >
                     <Card interactive={false} elevation={Elevation.TWO} className='extended-tools-container'>
                         {searchTool}
+                        <RulesViewer/>
                     </Card>
                 </Drawer> :
                 <Card interactive={false} elevation={Elevation.TWO} className='page-tool-extension'>
                     {searchTool}
+                    <RulesViewer/>
                 </Card>)
             :null
         );

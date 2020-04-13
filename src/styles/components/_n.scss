@@ -1,7 +1,9 @@
+$number-color : #0E5A8A;
+
 .n, .n-disabled{
   display: inline;
   padding: 0 0.1em !important;
-  color: #0E5A8A;
+  color: $number-color;
   font-weight: bold;
 }
 .n-disabled{
@@ -12,6 +14,6 @@
 }
 .n:hover{
   cursor: pointer;
-  background-color: #0E5A8A;
+  background-color: $number-color;
   color: $page-color;
 }

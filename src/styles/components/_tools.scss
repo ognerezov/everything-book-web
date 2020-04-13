@@ -1,3 +1,9 @@
 .extended-tools-container{
   height: 100%;
 }
+.rules-container{
+  overflow-x: hidden;
+  overflow-y: auto;
+  max-height: 80vh;
+  background-color: $rule-color;
+}

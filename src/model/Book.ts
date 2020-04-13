@@ -24,6 +24,7 @@ export const LEVEL = 'level';
 export const CHAPTER = 'chapter';
 export const FORMULA = 'formula';
 export const RULE = 'rule';
+export const RULE_BODY='rule body';
 export const QUOTATION = 'quotation';
 export const POEM = 'poem';
 export const REGULAR = 'regular';

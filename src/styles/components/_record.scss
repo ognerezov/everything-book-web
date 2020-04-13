@@ -1,18 +1,19 @@
-.level{
-
+$rule-color : #f7faff;
+.rule{
+  color: $number-color;
+  font-weight: bold;
+  background-color: $rule-color;
+  padding: 0.5em 1em 0.5em 1em;
 }
-.chapter{
-
+.rule-body{
+  color: $number-color;
+  font-weight: 400;
+  background-color: $rule-color;
+  padding: 0 1em 0.5em 1em;
 }
-.formula{
 
-}
-.quotation{
-
-}
-.regular{
-
-}
-.poem{
-
+.active-rule:hover{
+  cursor: pointer;
+  background-color: $number-color;
+  color: $page-color;
 }

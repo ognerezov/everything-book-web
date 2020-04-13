@@ -3,6 +3,7 @@ import bookReducer from '../reducers/book';
 import settingsReducer from "../reducers/settings";
 import userReducer from "../reducers/user";
 import errorReducer from "../reducers/error";
+import dataReducer from "../reducers/data";
 import thunkMiddleware from "redux-thunk";
 import {STORED_SETTINGS, STORED_USER} from "../utils/Literals";
 import {Settings} from "../model/Settings";
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
     book : bookReducer,
     settings :settingsReducer,
     user : userReducer,
-    error : errorReducer
+    error : errorReducer,
+    data : dataReducer
 });
 
 export type AppState = ReturnType<typeof rootReducer>;
@@ -28,7 +30,8 @@ function init() :AppState {
         settings,
         book : {},
         error : noException(),
-        user
+        user,
+        data :{}
     }
 }
 
