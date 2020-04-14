@@ -1,5 +1,16 @@
 import React, {FC} from "react";
-import {CHAPTER, FORMULA, isNumberDisabled, LEVEL, POEM, QUOTATION, Record, RULE, RULE_BODY} from "../../model/Book";
+import {
+    CHAPTER,
+    FORMULA,
+    isNumberDisabled,
+    LEVEL,
+    POEM,
+    QUOTATION,
+    Record,
+    RESULT,
+    RULE,
+    RULE_BODY
+} from "../../model/Book";
 import N from "../elements/N";
 import {H6, H4, H5, Callout} from "@blueprintjs/core";
 
@@ -27,6 +38,7 @@ export const RecordViewer : FC<RecordViewerProps> = props => {
                 {getSpans()}
             </H5></Callout>;
         case FORMULA:
+        case RESULT:
             return <Callout><H6 className='bp3-heading'>
                 {getSpans()}
             </H6></Callout>;

@@ -44,6 +44,7 @@ export const RULE_BODY='rule body';
 export const QUOTATION = 'quotation';
 export const POEM = 'poem';
 export const REGULAR = 'regular';
+export const RESULT = 'result';
 
 export const MIN_CHAPTER = 1;
 export const MAX_CHAPTER = 231;
