@@ -17,7 +17,7 @@ export type RecordFilter = (chapter :Chapter)=>Record[];
 export const quotationRecordFilter : RecordFilter = chapter => {
     const count = chapter.records.length-1;
 
-    if(count < 3){
+    if(count < 2){
         return chapter.records;
     }
 

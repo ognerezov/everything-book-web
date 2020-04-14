@@ -1,0 +1,48 @@
+$quotation-width-portrait : 98vw;
+$quotation-width-landscape : 30vw;
+$quotation-margin-landscape : 35vw;
+
+.quotation-button{
+  position: absolute;
+  left: 100%;
+  top: 0;
+  transform: translate(-100%,10%);
+}
+
+@media only screen and (orientation: portrait) {
+  .quotation-container--holder{
+    width: $quotation-width-portrait;
+  }
+  .quotation-container {
+    position: fixed;
+    top: 99vh;
+    left: 0;
+    margin: $y-margin $x-margin-portrait;
+    width: $quotation-width-portrait;
+    max-height: 40vh;
+    transform: translate(0,-100%);
+  }
+  .quotation-content{
+    width: $quotation-width-portrait;
+    margin: $y-margin 0;
+  }
+}
+@media only screen and (orientation: landscape) {
+  .quotation-container--holder{
+    width: $quotation-width-landscape;
+  }
+  .quotation-container {
+    position: fixed;
+    top: 95vh;
+    left: 0;
+    margin: $y-margin $quotation-margin-landscape;
+    width: $quotation-width-landscape;
+    transform: translate(0,-100%);
+    max-height: 30vh;
+  }
+  .quotation-content{
+    position: relative;
+    width: $quotation-width-landscape;
+    margin: $y-margin 0;
+  }
+}

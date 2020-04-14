@@ -26,14 +26,15 @@ class QuotationViewer extends PureComponent<QuotationViewerProps, QuotationViewe
         this.state = {index : 0};
     }
 
+    handleCloseQuotation=()=>{
+        this.setState({...this.state,
+            index : !this.props.quotations || this.state.index >= this.props.quotations.length-1 ? 0 : this.state.index +1})
+    }
 
     render(){
-        console.log(this.props.quotations);
-        return <div>{
-            this.props.quotations?
-            <Quotation chapter={this.props.quotations[this.state.index]}/> :null
-        }
-        </div>
+        return this.props.quotations? <div className='quotation-container--holder'>
+            <Quotation chapter={this.props.quotations[this.state.index]} closable={true} closeChapter={this.handleCloseQuotation}/>
+        </div>:null
     }
 }
 
