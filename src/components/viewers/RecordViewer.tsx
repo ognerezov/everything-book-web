@@ -39,8 +39,11 @@ export const RecordViewer : FC<RecordViewerProps> = props => {
                 {getSpans()}
             </div>;
         case QUOTATION:
-        case POEM:
             return <Callout className='bp3-text-muted'>
+                {getSpans()}
+            </Callout>;
+        case POEM:
+            return <Callout className='poem bp3-text-muted'>
                 {getSpans()}
             </Callout>;
         default:

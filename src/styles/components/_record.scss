@@ -11,9 +11,14 @@ $rule-color : #f7faff;
   background-color: $rule-color;
   padding: 0 1em 0.5em 1em;
 }
-
 .active-rule:hover{
   cursor: pointer;
   background-color: $number-color;
   color: $page-color;
+}
+$muted-text-color : #5c7080;
+$poem-back-color : #CED9E0;
+.poem{
+  padding: 0.5em 5em 0.5em 5em;
+  white-space: pre;
 }
