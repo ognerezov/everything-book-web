@@ -10,6 +10,22 @@ export interface Record extends LevelFragment{
     spans : Span [];
 }
 
+export type RecordFilter = (chapter :Chapter)=>Record[];
+
+
+
+export const quotationRecordFilter : RecordFilter = chapter => {
+    const count = chapter.records.length-1;
+
+    if(count < 3){
+        return chapter.records;
+    }
+
+    const selected = Math.floor(1 + Math.random()*count);
+
+    return [chapter.records[0],chapter.records[selected]]
+}
+
 export interface LevelFragment {
     number : number;
     type : string;

@@ -25,7 +25,7 @@ class RulesViewer extends PureComponent<RulesViewerProps,RulesViewerState>{
     constructor(props: RulesViewerProps, context: any) {
         super(props, context);
         if(!props.rules){
-            props.getData(DataType.GotRules);
+            props.getData(DataType.Rules);
         }
         this.state = {expandedRules :{}}
     }

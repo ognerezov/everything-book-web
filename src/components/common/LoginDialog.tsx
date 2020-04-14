@@ -7,6 +7,7 @@ import {connect} from "react-redux";
 import {enterCodeAndGetChapters} from "../../thunks/getChapter";
 import ProcessInfo from "./ProcessInfo";
 import {accessCode, inputAccessCode, login, V} from "../../vocabulary/Vocabulary";
+import QuotationViewer from "../viewers/QuotationViewer";
 
 interface LoginDialogProps {
     user : User;
@@ -38,6 +39,7 @@ class LoginDialog extends PureComponent<LoginDialogProps,LoginDialogState>{
             canEscapeKeyClose={false}
             canOutsideClickClose={false}>
             <ProcessInfo className='process-container'/>
+            <QuotationViewer />
             <div className="bp3-dialog-body">
                 <FormGroup
                     label={V[accessCode]}
