@@ -27,7 +27,7 @@ class LayersViewer extends PureComponent<LayersViewerProps>{
 
     render() {
         return isLoggedIn(this.props.user) ?<div>
-            <ChapterViewer chapter={this.props.chapter} closable={this.props.layers.length >1}/>
+            <ChapterViewer chapter={this.props.chapter} closable={false}/>
         </div> : null;
     }
 }

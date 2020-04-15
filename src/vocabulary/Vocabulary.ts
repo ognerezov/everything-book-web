@@ -5,6 +5,12 @@ export interface Vocabulary {
 export const V : Vocabulary={
     accessCode: 'Код доступа:',
     inputAccessCode : 'Введите код доступа',
+    requestCode : 'Запросить код доступа',
+    aboutCode : 'Для входа в систему используется временный код доступа. Вы можете запросить код, отправив ваш адресс электронной почты администратору.' +
+        ' Полученный код можно передавать другим пользователям',
+    email : 'Адрес электронной почты',
+    messageToAdmin : 'Сообщение',
+
 
     searchNumber : 'Поиск числа',
     inputNumber : 'Введите число',
@@ -46,6 +52,10 @@ export const inputNumber = 'inputNumber';
 export const search = 'search';
 export const login = 'login';
 export const numberOutOfRange = 'numberOutOfRange';
+export const requestCode = 'requestCode';
+export const aboutCode = 'aboutCode';
+export const email = 'email';
+export const messageToAdmin = 'messageToAdmin';
 
 export const accessCode=  'accessCode';
 export const inputAccessCode = 'inputAccessCode';

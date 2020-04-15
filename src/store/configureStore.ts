@@ -23,7 +23,7 @@ export type AppState = ReturnType<typeof rootReducer>;
 
 function init() :AppState {
     const settingsStr = localStorage.getItem(STORED_SETTINGS);
-    const settings : Settings = settingsStr ? JSON.parse(settingsStr) : {layers: [3]};
+    const settings : Settings = settingsStr ? JSON.parse(settingsStr) : {layers: [1]};
     const userStr = localStorage.getItem(STORED_USER);
     const user : User = userStr ? JSON.parse(userStr) : {};
     return {

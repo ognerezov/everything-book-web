@@ -33,7 +33,7 @@ export function setChapter(number :number) :SettingsAction {
     }
 }
 
-export function closeChapter() :SettingsAction {
+export function closeLayer() :SettingsAction {
     return {
         type : SettingsOperation.Close,
         number : -1

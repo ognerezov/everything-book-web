@@ -41,6 +41,9 @@ class LoginDialog extends PureComponent<LoginDialogProps,LoginDialogState>{
             <ProcessInfo className='process-container'/>
             <QuotationViewer />
             <div className="bp3-dialog-body">
+                <h6>
+
+                </h6>
                 <FormGroup
                     label={V[accessCode]}
                 >

@@ -9,12 +9,15 @@ import {isPortrait} from "../../service/MediaInfo";
 import {inputNumber, numberOutOfRange, search, searchNumber, V} from "../../vocabulary/Vocabulary";
 import {toast} from "../../service/toaster";
 import RulesViewer from "../viewers/RulesViewer";
+import {closeChapter} from "../../thunks/shiftChapter";
 
 interface ChapterToolsProps {
     nextChapter : any;
     previousChapter : any;
     gotoChapter : any;
     number : number;
+    layerCount : number;
+    closeChapter : any;
 }
 
 interface ChapterToolsState {
@@ -94,10 +97,14 @@ class ChapterTools extends PureComponent<ChapterToolsProps,ChapterToolsState>{
                     disabled={this.props.number <= MIN_CHAPTER}/>
             <Button className='page-tool--button' minimal={true} icon='arrow-right' onClick={this.props.nextChapter}
                     disabled={this.props.number >= MAX_CHAPTER}/>
+            <Button className='page-tool-menu-button' minimal={true} icon='cross' onClick={this.props.closeChapter}
+                    intent={this.props.layerCount ===1 ? Intent.NONE : Intent.DANGER} disabled={this.props.layerCount ===1}/>
         </div>
     }
 }
 
-const mapStateToProps =(state : AppState)=>({number : state.settings.layers[state.settings.layers.length-1]});
+const mapStateToProps =(state : AppState)=>({
+    number : state.settings.layers[state.settings.layers.length-1],
+    layerCount : state.settings.layers.length});
 
-export default connect(mapStateToProps,{nextChapter,previousChapter,gotoChapter})(ChapterTools);
+export default connect(mapStateToProps,{nextChapter,previousChapter,gotoChapter,closeChapter})(ChapterTools);
