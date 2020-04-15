@@ -19,8 +19,11 @@ const FIREBASE_GET_CHAPTER_URL='https://europe-west3-everything-book.cloudfuncti
 //     })
 // }
 
-export function getChaptersAsync(numbers:number[], password ?: string) : Promise<Chapter[]> {
+export function getChaptersAsync(values:number[], password ?: string) : Promise<Chapter[]> {
     const url = FIREBASE_GET_CHAPTER_URL;
+    const distinct = new Set<number>(values)
+    const numbers : number[] =[];
+    distinct.forEach(val=>numbers.push(val));
     const msg = JSON.stringify({
        'password' : password,
        numbers
