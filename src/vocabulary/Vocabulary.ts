@@ -10,7 +10,8 @@ export const V : Vocabulary={
         ' Полученный код можно передавать другим пользователям',
     email : 'Адрес электронной почты',
     messageToAdmin : 'Сообщение',
-
+    youNotRegistered : '',
+    doAuthorize : '',
 
     searchNumber : 'Поиск числа',
     inputNumber : 'Введите число',

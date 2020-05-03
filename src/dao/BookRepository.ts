@@ -5,7 +5,7 @@ import {Chapter} from "../model/Book";
 // const EXTENSION = ".json";
 //const DEV_PASSWORD ='dev';
 const FIREBASE_GET_CHAPTER_URL='https://europe-west3-everything-book.cloudfunctions.net/getChapters';
-
+const LOCALHOST_GET_CHAPTER_URL='http://localhost:8080/book/read';
 // export function getChapterAsync(number:number) : Promise<Chapter> {
 //     const url = CLOUDFRONT_URL + number +EXTENSION;
 //     return new Promise<Chapter>(async function (resolve, reject) {
@@ -20,7 +20,7 @@ const FIREBASE_GET_CHAPTER_URL='https://europe-west3-everything-book.cloudfuncti
 // }
 
 export function getChaptersAsync(values:number[], password ?: string) : Promise<Chapter[]> {
-    const url = FIREBASE_GET_CHAPTER_URL;
+    const url = LOCALHOST_GET_CHAPTER_URL;
     const distinct = new Set<number>(values)
     const numbers : number[] =[];
     distinct.forEach(val=>numbers.push(val));

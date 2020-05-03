@@ -1,7 +1,7 @@
 export interface User {
     isLoggedIn ?: boolean;
     accessCode ?: string;
-    token ?:string;
+    id ?:string;
 }
 
 export function isLoggedIn(user : User) : boolean {

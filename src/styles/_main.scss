@@ -24,7 +24,7 @@
 }
 
 $page-color : #FFFDFB;
-$content-width-portrait : 98vw;
+$content-width-portrait : 96vw;
 
 $x-margin-portrait : 1vw;
 $y-margin: 1vh;
@@ -35,18 +35,29 @@ $base-height : 100vh;
 $base-width : 100vw;
 $tool-top-portrait : $base-height - $tool-height-portrait;
 $close-button-right-landscape : $content-width-portrait + $x-margin-portrait;
+
+.page-tool--button{
+  flex: 0 0 40%;
+}
+.page-tool-menu-button{
+  flex: 0 0 10%;
+}
+.page-tool-cross{
+  flex: 0 0 10%;
+}
+
 @media only screen and (orientation: portrait) {
   .page{
     width: 100vw;
     height: 100vh;
-    padding: $y-margin $x-margin-portrait $tool-height-portrait $x-margin-portrait;
+    padding: $tool-height-portrait+$y-margin $x-margin-portrait $y-margin $x-margin-portrait;
     background-color: $page-color;
     overflow-y: auto;
     overflow-x: hidden;
   }
   .page-content{
     width: $content-width-portrait;
-    margin: $y-margin 0 $tool-height-portrait 0 ;
+    margin: $y-margin $x-margin-portrait;
   }
   .close-button{
     position: absolute;
@@ -55,6 +66,7 @@ $close-button-right-landscape : $content-width-portrait + $x-margin-portrait;
     transform: translate(-100%,50%);
   }
   .page-tool{
+    padding: 0 0.2vw 0.2vh 0.2vw;
     background-color: $page-color;
     overflow-y: hidden;
     overflow-x: auto;
@@ -62,20 +74,9 @@ $close-button-right-landscape : $content-width-portrait + $x-margin-portrait;
     flex-flow: row nowrap;
     justify-content: space-around;
     position: fixed;
-    width: $content-width-portrait ;
-    top: $tool-top-portrait;
+    width: 100vw;
+    top: 0;
     height: $tool-height-portrait;
-  }
-  .page-tool--button{
-    flex: 0 0 39%;
-    margin: 0.5% 0;
-  }
-  .page-tool-menu-button{
-    position: fixed;
-    top: $tool-top-portrait;
-    left: 0;
-    width: $tool-height-portrait;
-    margin: $y-margin $x-margin-portrait;
   }
 }
 
@@ -99,12 +100,13 @@ $close-button-right-landscape : $content-width-landscape + $x-margin-landscape;
     transform: translate(-100%,50%);
   }
   .page-tool{
+    padding: 0 0.2vw;
     background-color: $page-color;
     overflow-y: auto;
     overflow-x: hidden;
     display: flex;
     flex-flow: row nowrap;
-    justify-content: space-around;
+    justify-content: flex-start;
     width: $content-width-landscape;
     margin: 0 $x-margin-portrait ;
     height: $tool-height-landscape ;
@@ -115,18 +117,6 @@ $close-button-right-landscape : $content-width-landscape + $x-margin-landscape;
     width: $content-width-landscape;
     margin: $y-margin 0;
   }
-  .page-tool--button{
-    flex: 0 0 19%;
-    margin: 0.5%;
-  }
-  .page-tool-menu-button{
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: $tool-height-landscape;
-    margin: $y-margin $x-margin-landscape ;
-  }
-
   .page-tool-extension{
     position: fixed;
     top: 0;
