@@ -5,7 +5,9 @@
 .App{
 
 }
-
+button:focus{
+  outline: none;
+}
 .closable{
   position: relative;
 }
