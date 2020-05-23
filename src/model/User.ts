@@ -1,9 +1,11 @@
 export interface User {
-    isLoggedIn ?: boolean;
+    hasAccess ?: boolean;
     accessCode ?: string;
+    token ?: string;
+    refreshToken ?: string;
     id ?:string;
 }
 
 export function isLoggedIn(user : User) : boolean {
-    return !!user.isLoggedIn && !!user.accessCode;
+    return !!user.hasAccess && !!user.accessCode;
 }

@@ -11,7 +11,7 @@ $rule-color : #f7faff;
   background-color: $rule-color;
   padding: 0 1em 0.5em 1em;
 }
-.active-rule:hover{
+.active-rule:hover, .accent{
   cursor: pointer;
   background-color: $number-color;
   color: $page-color;

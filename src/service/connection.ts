@@ -20,8 +20,8 @@ export function get(url : string): Promise<ConnectionResponse>  {
     return sendAsync(Method.GET, url);
 }
 
-export function post(url : string, msg : string): Promise<ConnectionResponse>    {
-    return sendAsync(Method.POST, url,msg,undefined,DEFAULT_CONTENT_TYPE,0);
+export function post(url : string, msg : string, auth : string|undefined): Promise<ConnectionResponse>    {
+    return sendAsync(Method.POST, url,msg,auth,DEFAULT_CONTENT_TYPE,0);
 }
 
 export function sendAsync(method : Method, url : string, message : BodyInit|undefined = undefined,

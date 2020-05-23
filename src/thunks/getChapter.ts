@@ -33,7 +33,7 @@ export async function proceedGetChapter(numbers : number [],dispatch : any, getS
     try {
         dispatch(gotChapters(await getChaptersAsync(numbers,getState().user.accessCode)));
     }catch (e) {
-        if(e.status === 401 || !getState().user.isLoggedIn){
+        if(e.status === 401 || !getState().user.hasAccess){
             dispatch(setUserLoggedOut());
             saveUser(getState().user);
         } else{

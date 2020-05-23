@@ -1,10 +1,8 @@
 import {Action} from "redux";
 
 export enum DataType {
-    Rules = "rules",
-    Quotations = "quotations"
-    // Rules = "getRules",
-    // Quotations = "getQuotation"
+    Rules = "book/rules",
+    Quotations = "free/quotations"
 }
 
 export interface DataAction extends Action<DataType>{

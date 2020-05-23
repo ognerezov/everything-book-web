@@ -17,7 +17,16 @@ export const V : Vocabulary={
     inputNumber : 'Введите число',
     search : 'Поиск',
     login : 'Войти',
+    enter_code : 'Ввести код',
     numberOutOfRange : 'Число за пределами текущих знаний системы',
+    register : 'Зарегистрироваться',
+    registration: 'Регистрация',
+    cancel : 'Отмена',
+    password: 'Пароль',
+    input_password: 'Введите пароль',
+    repeat_password: 'Повторите пароль',
+    register_terms : 'Пройдя процедуру регистрации вы получите временный код доступа к книге. Код можно передавать другим пользователям.',
+
 
     exception : 'Ошибка',
     server_unreachable : 'Не удалось связаться с сервером',
@@ -52,14 +61,21 @@ export const searchNumber = 'searchNumber';
 export const inputNumber = 'inputNumber';
 export const search = 'search';
 export const login = 'login';
+export const register = 'register';
+export const registration = 'registration';
+export const cancel = 'cancel';
+export const enter_code = 'enter_code';
 export const numberOutOfRange = 'numberOutOfRange';
 export const requestCode = 'requestCode';
 export const aboutCode = 'aboutCode';
 export const email = 'email';
 export const messageToAdmin = 'messageToAdmin';
-
 export const accessCode=  'accessCode';
 export const inputAccessCode = 'inputAccessCode';
+export const password = 'password';
+export const input_password = 'input_password';
+export const repeat_password = 'repeat_password';
+export const register_terms = 'register_terms';
 export const exception = 'exception';
 export const server_unreachable = 'server_unreachable';
 export const no_network = 'no_network';
