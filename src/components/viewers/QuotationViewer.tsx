@@ -17,7 +17,6 @@ interface QuotationViewerState {
 
 class QuotationViewer extends PureComponent<QuotationViewerProps, QuotationViewerState>{
 
-
     constructor(props: QuotationViewerProps, context: any) {
         super(props, context);
         if(!props.quotations){

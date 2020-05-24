@@ -15,12 +15,6 @@ interface LayersViewerProps {
 
 class LayersViewer extends PureComponent<LayersViewerProps>{
 
-
-    constructor(props: LayersViewerProps, context: any) {
-        super(props, context);
-        this.props.getChapters(props.layers);
-    }
-
     componentWillUnmount(): void {
         this.props.getChapters(this.props.layers);
     }

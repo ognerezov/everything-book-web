@@ -57,7 +57,7 @@ class LoginDialog extends PureComponent<LoginDialogProps,LoginDialogState>{
             invalidEmail : false,
             notSamePasswords : false
         }
-        this.props.refresh();
+        this.props.refresh(this.props.getCurrentChapters);
     }
 
     setAccessCode =(accessCode: string) =>{

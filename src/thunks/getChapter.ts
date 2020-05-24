@@ -34,8 +34,10 @@ export async function proceedGetChapter(numbers : number [],dispatch : any, getS
         dispatch(gotChapters(await getChaptersAsync(numbers,getState().user.accessCode)));
     }catch (e) {
         if(e.status === 401 || !getState().user.hasAccess){
+            console.log(getState().user);
             dispatch(setUserLoggedOut());
             saveUser(getState().user);
+            console.log(getState().user);
         } else{
             console.log(e);
         }

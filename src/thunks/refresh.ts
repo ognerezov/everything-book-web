@@ -7,12 +7,15 @@ import {registered} from "../actions/user";
 import {saveUser} from "../service/LocalStorage";
 import {refreshAsync} from "../dao/UserDao";
 
-export const refresh =(): ThunkAction<void, AppState, null, Action> => async (dispatch,getState) => {
+export const refresh =(after : ()=>void): ThunkAction<void, AppState, null, Action> => async (dispatch,getState) => {
     const currentUser : User = getState().user;
     if(!currentUser) return ;
     try {
         const token = currentUser.refreshToken;
-        if(!token) return;
+        if(!token){
+            after();
+            return;
+        }
         const user : User = await refreshAsync(token);
         user.accessCode = currentUser.accessCode;
         dispatch(registered(user));
@@ -24,4 +27,7 @@ export const refresh =(): ThunkAction<void, AppState, null, Action> => async (di
         dispatch(registered(currentUser));
         saveUser(getState().user);
     }
+
+    after();
+
 };
