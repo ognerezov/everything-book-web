@@ -3,7 +3,7 @@ export interface User {
     accessCode ?: string;
     token ?: string;
     refreshToken ?: string;
-    id ?:string;
+    username ?:string;
 }
 
 export function isLoggedIn(user : User) : boolean {

@@ -9,6 +9,7 @@ export const V : Vocabulary={
     aboutCode : 'Для входа в систему используется временный код доступа. Вы можете запросить код, отправив ваш адресс электронной почты администратору.' +
         ' Полученный код можно передавать другим пользователям',
     email : 'Адрес электронной почты',
+    wrong_email_format : 'Неверный формат электронной почты',
     messageToAdmin : 'Сообщение',
     youNotRegistered : '',
     doAuthorize : '',
@@ -21,12 +22,13 @@ export const V : Vocabulary={
     numberOutOfRange : 'Число за пределами текущих знаний системы',
     register : 'Зарегистрироваться',
     registration: 'Регистрация',
+    registered_user_caption : 'Ваше имя пользователя: ',
     cancel : 'Отмена',
     password: 'Пароль',
     input_password: 'Введите пароль',
     repeat_password: 'Повторите пароль',
-    register_terms : 'Пройдя процедуру регистрации вы получите временный код доступа к книге. Код можно передавать другим пользователям.',
-
+    register_terms : 'Пройдя процедуру регистрации, вы получите временный код доступа к книге. Код можно передавать другим пользователям.',
+    password_not_matches : 'Пароль не соответствует подтверждению',
 
     exception : 'Ошибка',
     server_unreachable : 'Не удалось связаться с сервером',
@@ -47,6 +49,7 @@ export const V : Vocabulary={
     bad_request : 'Неправильный запрос',
     bad_request_data : 'В запросе указаны некорректные данные',
     conflict : 'Конфликт',
+    user_exists : 'Пользователь с таким адресом электронной почты уже зарегистрирован',
     duplicated_id : 'Ресурс с таким идентификатором уже существует',
     data_in_use : 'Данные не могут быть удалены, пока на на них ссылаются другие данные',
     not_found : 'Ресурс не найден',
@@ -61,7 +64,7 @@ export const searchNumber = 'searchNumber';
 export const inputNumber = 'inputNumber';
 export const search = 'search';
 export const login = 'login';
-export const register = 'register';
+export const register_caption = 'register';
 export const registration = 'registration';
 export const cancel = 'cancel';
 export const enter_code = 'enter_code';
@@ -69,10 +72,12 @@ export const numberOutOfRange = 'numberOutOfRange';
 export const requestCode = 'requestCode';
 export const aboutCode = 'aboutCode';
 export const email = 'email';
+export const wrong_email_format = 'wrong_email_format';
 export const messageToAdmin = 'messageToAdmin';
 export const accessCode=  'accessCode';
 export const inputAccessCode = 'inputAccessCode';
 export const password = 'password';
+export const password_not_matches = 'password_not_matches';
 export const input_password = 'input_password';
 export const repeat_password = 'repeat_password';
 export const register_terms = 'register_terms';
@@ -103,3 +108,5 @@ export const processing = 'processing';
 export const waiting_server_response = 'waiting_server_response';
 export const operation_time_out ='operation_time_out';
 export const server_time_out ='server_time_out';
+export const user_exists ='user_exists';
+export const registered_user_caption = 'registered_user_caption';

@@ -1,3 +1,4 @@
+
 export const DEFAULT_CONTENT_TYPE = "application/json; charset=utf8";
 
 export enum Method {
@@ -22,6 +23,19 @@ export function get(url : string): Promise<ConnectionResponse>  {
 
 export function post(url : string, msg : string, auth : string|undefined): Promise<ConnectionResponse>    {
     return sendAsync(Method.POST, url,msg,auth,DEFAULT_CONTENT_TYPE,0);
+}
+
+export function request<T>(method : Method, url : string, message : BodyInit|undefined = undefined,
+                           auth : string|undefined = undefined, contentType : string = DEFAULT_CONTENT_TYPE,
+                           timeout : number = DEFAULT_TIME_OUT) : Promise<T> {
+    return new Promise<T>(async function (resolve, reject) {
+        try {
+            const response : ConnectionResponse = await sendAsync(method,url,message,auth,contentType,timeout);
+            resolve(JSON.parse(response.message))
+        } catch (e) {
+            reject(e);
+        }
+    })
 }
 
 export function sendAsync(method : Method, url : string, message : BodyInit|undefined = undefined,

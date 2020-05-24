@@ -1,10 +1,11 @@
 import {ConnectionResponse, post} from "../service/connection";
 import {Chapter} from "../model/Book";
+import {getUrl} from "../api/BackendUrl";
 
-const LOCALHOST_GET_CHAPTER_URL='http://localhost:8080/book/read';
+const GET_CHAPTER_URL=getUrl('book/read');
 
 export function getChaptersAsync(values:number[], password ?: string) : Promise<Chapter[]> {
-    const url = LOCALHOST_GET_CHAPTER_URL;
+    const url = GET_CHAPTER_URL;
     const distinct = new Set<number>(values)
     const numbers : number[] =[];
     distinct.forEach(val=>numbers.push(val));

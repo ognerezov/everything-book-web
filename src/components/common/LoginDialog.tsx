@@ -11,18 +11,27 @@ import {
     cancel, email,
     enter_code, input_password,
     inputAccessCode,
-    login, password,
-    register, register_terms,
+    login, password, password_not_matches,
+    register_caption, register_terms, registered_user_caption,
     registration, repeat_password,
-    V
+    V, wrong_email_format
 } from "../../vocabulary/Vocabulary";
 import QuotationViewer from "../viewers/QuotationViewer";
 import {Intent} from "@blueprintjs/core/lib/esm/common/intent";
+import {isEmailValid} from "../../validators/EmailValidator";
+import {register} from "../../thunks/register";
+import {ConnectionResponse} from "../../service/connection";
+import {getErrorMessage} from "../../errors/ErrorMapper";
+import {getCurrentChapters} from "../../thunks/getChapter";
+import {refresh} from "../../thunks/refresh";
 
 interface LoginDialogProps {
     user : User;
     noException : any;
     enterCodeAndGetChapters :any;
+    register : any;
+    getCurrentChapters :any;
+    refresh : any;
 }
 
 interface LoginDialogState {
@@ -30,8 +39,11 @@ interface LoginDialogState {
     showRegistration: boolean;
     showPassword : boolean;
     username ?: string;
+    invalidEmail : boolean;
     password ?: string;
     repeatPassword ?: string;
+    notSamePasswords: boolean;
+    errorMessage ?: string;
 }
 
 class LoginDialog extends PureComponent<LoginDialogProps,LoginDialogState>{
@@ -41,8 +53,11 @@ class LoginDialog extends PureComponent<LoginDialogProps,LoginDialogState>{
         this.state = {
             accessCode : '',
             showRegistration : false,
-            showPassword : false
+            showPassword : false,
+            invalidEmail : false,
+            notSamePasswords : false
         }
+        this.props.refresh();
     }
 
     setAccessCode =(accessCode: string) =>{
@@ -50,16 +65,71 @@ class LoginDialog extends PureComponent<LoginDialogProps,LoginDialogState>{
     };
 
     handleShowRegistration =()=>{
-        this.setState({...this.state,showRegistration :true});
+        this.setState({...this.state,showRegistration :true, errorMessage : undefined});
     }
 
     handleCloseRegistration =()=>{
-        this.setState({...this.state,showRegistration :false});
+        this.setState({...this.state,showRegistration :false, errorMessage : undefined});
     }
 
     toggleShowPassword=()=>{
         this.setState({...this.state,showPassword : !this.state.showPassword})
     }
+
+    setUsername=(username : string)=>{
+        const invalidEmail = username !== undefined && !isEmailValid(username);
+        this.setState({...this.state,
+                                invalidEmail,
+                                username,
+                                errorMessage : undefined
+        });
+    }
+
+    setPassword=(password : string)=>{
+        const notSamePasswords = password !== this.state.repeatPassword;
+        this.setState({...this.state,
+            password,
+            notSamePasswords,
+            errorMessage : undefined
+        });
+    }
+
+    setRepeatPassword=(repeatPassword : string)=>{
+        const notSamePasswords = repeatPassword !== this.state.password;
+        this.setState({...this.state,
+            repeatPassword,
+            notSamePasswords,
+            errorMessage : undefined
+        });
+    }
+
+    getRegistrationStatus=()=>{
+        return (
+        <Card className='process-container'>
+            {this.state.errorMessage ?
+                <div className='rule-body error-message'>
+                    {this.state.errorMessage}
+                </div>:
+                this.state.invalidEmail ?
+                    <div className='rule-body error-message'>
+                        {V[wrong_email_format]}
+                    </div> :
+                    this.state.notSamePasswords ?
+                        <div className='rule-body error-message'>
+                            {V[password_not_matches]}
+                        </div>:
+                        <div className='rule-body accent'>
+                            {V[register_terms]}
+                        </div>
+            }
+        </Card>)
+    }
+
+    registrationErrorHandler=(e: ConnectionResponse)=>{
+        this.setState({...this.state, errorMessage : getErrorMessage(e)})
+    }
+
+    register =()=>{this.props.register(this.state.username,this.state.password,this.registrationErrorHandler, this.props.getCurrentChapters)};
 
     getRegistrationForm = ()=>{
         const lockButton = (
@@ -75,11 +145,7 @@ class LoginDialog extends PureComponent<LoginDialogProps,LoginDialogState>{
                 isOpen={this.state.showRegistration }
                 transitionDuration={0}
             >
-                <Card className='process-container'>
-                    <div className='rule-body accent'>
-                        {V[register_terms]}
-                    </div>
-                </Card>
+                {this.getRegistrationStatus()}
                 <div className="bp3-dialog-body">
 
                     <FormGroup
@@ -89,9 +155,7 @@ class LoginDialog extends PureComponent<LoginDialogProps,LoginDialogState>{
                             type="email"
                             className="login-fields"
                             placeholder={V[email]}
-                            onChange={(event : React.FormEvent<HTMLInputElement>)=>
-                            {this.setAccessCode(event.currentTarget.value);
-                                this.props.noException()}}
+                            onChange={(event : React.FormEvent<HTMLInputElement>)=> this.setUsername(event.currentTarget.value)}
                         />
                     </FormGroup>
                     <FormGroup
@@ -103,7 +167,7 @@ class LoginDialog extends PureComponent<LoginDialogProps,LoginDialogState>{
                             type={this.state.showPassword ? "text" : "password"}
                             rightElement={lockButton}
                             onChange={(event : React.FormEvent<HTMLInputElement>)=>
-                            {this.setAccessCode(event.currentTarget.value);
+                            {this.setPassword(event.currentTarget.value);
                                 this.props.noException()}}
                         />
                     </FormGroup>
@@ -116,7 +180,7 @@ class LoginDialog extends PureComponent<LoginDialogProps,LoginDialogState>{
                             type={this.state.showPassword ? "text" : "password"}
                             rightElement={lockButton}
                             onChange={(event : React.FormEvent<HTMLInputElement>)=>
-                            {this.setAccessCode(event.currentTarget.value);
+                            {this.setRepeatPassword(event.currentTarget.value);
                                 this.props.noException()}}
                         />
                     </FormGroup>
@@ -124,7 +188,10 @@ class LoginDialog extends PureComponent<LoginDialogProps,LoginDialogState>{
                 <div className='bp3-dialog-footer'>
                     <div className='bp3-dialog-footer-actions'>
                         <Button icon='cross' onClick={this.handleCloseRegistration} minimal={true} intent={Intent.DANGER}>{V[cancel]} </Button>
-                        <Button icon='user' onClick={this.handleShowRegistration} minimal={true}>{V[register]} </Button>
+                        <Button icon='user'
+                                onClick={this.register}
+                                minimal={true}
+                                disabled={!this.state.username || !this.state.password || this.state.invalidEmail || this.state.notSamePasswords}>{V[register_caption]} </Button>
                     </div>
                 </div>
             </Dialog> )
@@ -160,10 +227,15 @@ class LoginDialog extends PureComponent<LoginDialogProps,LoginDialogState>{
                     </FormGroup>
                 </div>
                 <div className='bp3-dialog-footer'>
+                    { this.props.user && this.props.user.username ?
+                    <div>
+                        {V[registered_user_caption] + this.props.user.username}
+                    </div> :
                     <div className='bp3-dialog-footer-actions'>
                         <Button icon='log-in' onClick={this.handleShowRegistration} minimal={true}>{V[login]} </Button>
-                        <Button icon='user' onClick={this.handleShowRegistration} minimal={true}>{V[register]} </Button>
-                    </div>
+                        <Button icon='user' onClick={this.handleShowRegistration} minimal={true}>{V[register_caption]} </Button>
+                    </div>}
+
                 </div>
             </Dialog>
         </div>
@@ -179,4 +251,4 @@ const mapStateToProps =(state : AppState)=>({
     user : state.user
 });
 
-export default connect(mapStateToProps,{noException,enterCodeAndGetChapters})(LoginDialog)
+export default connect(mapStateToProps,{noException,enterCodeAndGetChapters,register,getCurrentChapters,refresh})(LoginDialog)

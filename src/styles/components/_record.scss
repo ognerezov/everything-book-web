@@ -16,6 +16,11 @@ $rule-color : #f7faff;
   background-color: $number-color;
   color: $page-color;
 }
+.error-message{
+  cursor: pointer;
+  background-color: $error-color;
+  color: $page-color;
+}
 $muted-text-color : #5c7080;
 $poem-back-color : #CED9E0;
 .poem{

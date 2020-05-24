@@ -1,7 +1,8 @@
 import { Method, sendAsync} from "../service/connection";
+import {getBaseUrl} from "../api/BackendUrl";
 
 //export const BASE_URL ='https://europe-west3-everything-book.cloudfunctions.net/';
-export const BASE_URL ='http://localhost:8080/';
+export const BASE_URL =getBaseUrl();
 
 
 export function getCloudDataAsync(path : string, auth : string| undefined = undefined,  method : Method = Method.GET, object : any=undefined): Promise<string> {
