@@ -17,6 +17,7 @@ export default function  (error: Exception = noException(), action: Exception) :
         case ExceptionType.WrongTempToken:
         case ExceptionType.TimeOut:
         case ExceptionType.ModificationProhibited:
+        case ExceptionType.WaitForEmail:
             return action;
         case ExceptionType.NoNetwork:
             return error.type === ExceptionType.TimeOut ? error : action;

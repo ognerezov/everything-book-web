@@ -3,10 +3,10 @@ import {AppState} from "../store/configureStore";
 import {Action} from "redux";
 import {gotChapters} from "../actions/book";
 import {getChaptersAsync} from "../dao/BookRepository";
-import {setTemporalPassword} from "../actions/user";
+import {deleteAccessCode, setTemporalPassword} from "../actions/user";
 import {onException,onProcess} from "../actions/error";
 import {saveUser} from "../service/LocalStorage";
-import {setUserLoggedIn,setUserLoggedOut} from "../actions/user";
+import {setUserLoggedIn} from "../actions/user";
 
 export const getChapters =(numbers : number[]): ThunkAction<void, AppState, null, Action> => async (dispatch,getState) => {
     const filtered = numbers.filter(n=>!getState().book[n]);
@@ -35,7 +35,7 @@ export async function proceedGetChapter(numbers : number [],dispatch : any, getS
     }catch (e) {
         if(e.status === 401 || !getState().user.hasAccess){
             console.log(getState().user);
-            dispatch(setUserLoggedOut());
+            dispatch(deleteAccessCode());
             saveUser(getState().user);
             console.log(getState().user);
         } else{

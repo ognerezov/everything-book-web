@@ -7,11 +7,11 @@ export default function (user : User={}, action : UserAction ) : User {
         case UserActionType.SetAccessCode:
          return {...user, accessCode : action.value};
         case UserActionType.DeleteAccessCode:
-            return {...user,accessCode : undefined};
+            return {...user,accessCode : undefined,hasAccess :false};
         case UserActionType.SetLoggedIn:
             return {...user,hasAccess : true};
         case UserActionType.SetLoggedOut:
-            return {...user,accessCode : undefined,hasAccess :false};
+            return {...user,username : undefined,token :undefined,refreshToken : undefined};
         case UserActionType.Registered:
             objAction = action as UserObjectAction;
             return {...objAction.user, hasAccess : !!objAction.user.accessCode}

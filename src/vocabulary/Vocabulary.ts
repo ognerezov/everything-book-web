@@ -18,6 +18,7 @@ export const V : Vocabulary={
     inputNumber : 'Введите число',
     search : 'Поиск',
     login : 'Войти',
+    logout : 'Выйти',
     enter_code : 'Ввести код',
     numberOutOfRange : 'Число за пределами текущих знаний системы',
     register : 'Зарегистрироваться',
@@ -29,6 +30,8 @@ export const V : Vocabulary={
     repeat_password: 'Повторите пароль',
     register_terms : 'Пройдя процедуру регистрации, вы получите временный код доступа к книге. Код можно передавать другим пользователям.',
     password_not_matches : 'Пароль не соответствует подтверждению',
+    check_email :'Проверьте ваш почтовый ящик',
+    get_access_code : 'Код доступа выслан вам на почту',
 
     exception : 'Ошибка',
     server_unreachable : 'Не удалось связаться с сервером',
@@ -110,3 +113,6 @@ export const operation_time_out ='operation_time_out';
 export const server_time_out ='server_time_out';
 export const user_exists ='user_exists';
 export const registered_user_caption = 'registered_user_caption';
+export const check_email = 'check_email';
+export const get_access_code ='get_access_code';
+export const logout_label = 'logout';

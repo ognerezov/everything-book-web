@@ -4,9 +4,9 @@ import {
     authorization_failure,
     bad_credentials,
     bad_request,
-    bad_request_data,
+    bad_request_data, check_email,
     conflict,
-    contact_administration, data_in_use, duplicated_id,
+    contact_administration, data_in_use, duplicated_id, get_access_code,
     interface_label_301, no_data_found,
     no_network, not_found,
     object_missing,
@@ -114,5 +114,11 @@ export function getExceptionViewInfo(exception: Exception) : ExceptionViewInfo{
                 message : waiting_server_response,
                 intent : Intent.PRIMARY,
                 icon : 'globe-network'};
+        case ExceptionType.WaitForEmail:
+            return {
+                title : check_email,
+                message : get_access_code,
+                intent : Intent.SUCCESS,
+                icon : 'envelope'};
     }
 }

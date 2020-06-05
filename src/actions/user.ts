@@ -36,6 +36,13 @@ export function setUserLoggedOut() {
     }
 }
 
+export function deleteAccessCode() {
+    return {
+        type : UserActionType.DeleteAccessCode
+    }
+}
+
+
 export function registered(user : User): UserObjectAction {
  return {
      type : UserActionType.Registered,

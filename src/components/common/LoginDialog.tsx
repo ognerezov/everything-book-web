@@ -2,7 +2,7 @@ import React,{PureComponent} from "react";
 import {Button, Card, Dialog, FormGroup, InputGroup} from "@blueprintjs/core";
 import {isLoggedIn, User} from "../../model/User";
 import {AppState} from "../../store/configureStore";
-import {noException} from "../../actions/error";
+import {ExceptionType, noException} from "../../actions/error";
 import {connect} from "react-redux";
 import {enterCodeAndGetChapters} from "../../thunks/getChapter";
 import ProcessInfo from "./ProcessInfo";
@@ -10,8 +10,7 @@ import {
     accessCode,
     cancel, email,
     enter_code, input_password,
-    inputAccessCode,
-    login, password, password_not_matches,
+    inputAccessCode, logout_label, password, password_not_matches,
     register_caption, register_terms, registered_user_caption,
     registration, repeat_password,
     V, wrong_email_format
@@ -19,7 +18,7 @@ import {
 import QuotationViewer from "../viewers/QuotationViewer";
 import {Intent} from "@blueprintjs/core/lib/esm/common/intent";
 import {isEmailValid} from "../../validators/EmailValidator";
-import {register} from "../../thunks/register";
+import {register,logout} from "../../thunks/register";
 import {ConnectionResponse} from "../../service/connection";
 import {getErrorMessage} from "../../errors/ErrorMapper";
 import {getCurrentChapters} from "../../thunks/getChapter";
@@ -32,6 +31,7 @@ interface LoginDialogProps {
     register : any;
     getCurrentChapters :any;
     refresh : any;
+    logout : any;
 }
 
 interface LoginDialogState {
@@ -70,6 +70,11 @@ class LoginDialog extends PureComponent<LoginDialogProps,LoginDialogState>{
 
     handleCloseRegistration =()=>{
         this.setState({...this.state,showRegistration :false, errorMessage : undefined});
+    }
+
+    handleSuccessRegistration = ()=>{
+        this.props.noException(ExceptionType.WaitForEmail);
+        this.handleCloseRegistration();
     }
 
     toggleShowPassword=()=>{
@@ -126,10 +131,20 @@ class LoginDialog extends PureComponent<LoginDialogProps,LoginDialogState>{
     }
 
     registrationErrorHandler=(e: ConnectionResponse)=>{
+        this.props.noException();
         this.setState({...this.state, errorMessage : getErrorMessage(e)})
     }
 
-    register =()=>{this.props.register(this.state.username,this.state.password,this.registrationErrorHandler, this.props.getCurrentChapters)};
+    register =()=>{this.props.register(
+        this.state.username,
+        this.state.password,
+        this.registrationErrorHandler,
+        this.handleSuccessRegistration
+    )};
+
+    handleLogout = ()=>{
+        this.props.logout();
+    }
 
     getRegistrationForm = ()=>{
         const lockButton = (
@@ -146,6 +161,7 @@ class LoginDialog extends PureComponent<LoginDialogProps,LoginDialogState>{
                 transitionDuration={0}
             >
                 {this.getRegistrationStatus()}
+                <ProcessInfo/>
                 <div className="bp3-dialog-body">
 
                     <FormGroup
@@ -206,7 +222,7 @@ class LoginDialog extends PureComponent<LoginDialogProps,LoginDialogState>{
                 isOpen={!isLoggedIn(this.props.user)}
                 canEscapeKeyClose={false}
                 canOutsideClickClose={false}>
-                <ProcessInfo className='process-container'/>
+                {this.state.showRegistration ? null : <ProcessInfo className='process-container'/>}
                 <QuotationViewer />
                 {this.getRegistrationForm()}
                 <div className="bp3-dialog-body">
@@ -228,11 +244,21 @@ class LoginDialog extends PureComponent<LoginDialogProps,LoginDialogState>{
                 </div>
                 <div className='bp3-dialog-footer'>
                     { this.props.user && this.props.user.username ?
-                    <div>
-                        {V[registered_user_caption] + this.props.user.username}
+                    <div className='bottom-container'>
+
+                        <div className='login-username'>
+                            <span className='login-username-text--container'>
+                                <span className='login-username-text'>
+                                    {V[registered_user_caption] + this.props.user.username}
+                                </span>
+
+                            </span>
+                        </div>
+                        <Button className='login-button' icon='log-out' onClick={this.handleLogout} minimal={true}>{V[logout_label]} </Button>
+
                     </div> :
                     <div className='bp3-dialog-footer-actions'>
-                        <Button icon='log-in' onClick={this.handleShowRegistration} minimal={true}>{V[login]} </Button>
+                        {/*<Button icon='log-in' onClick={this.handleShowRegistration} minimal={true}>{V[login]} </Button>*/}
                         <Button icon='user' onClick={this.handleShowRegistration} minimal={true}>{V[register_caption]} </Button>
                     </div>}
 
@@ -240,7 +266,6 @@ class LoginDialog extends PureComponent<LoginDialogProps,LoginDialogState>{
             </Dialog>
         </div>
     }
-
     private handleLoginAttempt =()=>{
        this.props.enterCodeAndGetChapters(this.state.accessCode);
     }
@@ -251,4 +276,4 @@ const mapStateToProps =(state : AppState)=>({
     user : state.user
 });
 
-export default connect(mapStateToProps,{noException,enterCodeAndGetChapters,register,getCurrentChapters,refresh})(LoginDialog)
+export default connect(mapStateToProps,{noException,enterCodeAndGetChapters,register,getCurrentChapters,refresh,logout})(LoginDialog)

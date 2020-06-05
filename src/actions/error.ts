@@ -2,6 +2,7 @@ import {Action} from "redux";
 
 
 export enum ExceptionType {
+    WaitForEmail = -3,
     TimeOut = -2,
     Processing = -1,
     NoNetwork = 0,
