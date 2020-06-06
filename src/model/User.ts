@@ -4,6 +4,7 @@ export interface User {
     token ?: string;
     refreshToken ?: string;
     username ?:string;
+    emailStatus ?: string;
 }
 
 export function isLoggedIn(user : User) : boolean {

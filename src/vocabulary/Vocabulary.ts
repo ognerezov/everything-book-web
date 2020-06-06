@@ -61,12 +61,18 @@ export const V : Vocabulary={
     waiting_server_response : 'Запрос отправлен, программа ожидает ответ сервера...',
     operation_time_out : 'Превышено время ожидания',
     server_time_out : 'Ответ от сервера не был получен в течении допустимого времени.',
+
+    email_was_sent : 'Проверьте указанные почтовый адрес',
+    email_is_processed: 'Сообщение обрабатывается',
+    email_delivered : 'Сообщение доставлено на указанный адрес',
+    email_error : 'Ошибка доставки сообщения, проверьте правильность адреса',
+    wrong_username_password : 'Неверный логин или пароль'
 };
 
 export const searchNumber = 'searchNumber';
 export const inputNumber = 'inputNumber';
 export const search = 'search';
-export const login = 'login';
+export const login_caption = 'login';
 export const register_caption = 'register';
 export const registration = 'registration';
 export const cancel = 'cancel';
@@ -116,3 +122,9 @@ export const registered_user_caption = 'registered_user_caption';
 export const check_email = 'check_email';
 export const get_access_code ='get_access_code';
 export const logout_label = 'logout';
+
+export const email_was_sent = 'email_was_sent';
+export const email_is_processed = 'email_is_processed';
+export const email_delivered = 'email_delivered';
+export const email_error = 'email_error';
+export const wrong_username_password ='wrong_username_password';

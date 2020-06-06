@@ -11,6 +11,14 @@ export function registerAsync(username: string, password: string) : Promise<User
     });
     return request<User>(Method.POST, BASE_RUL +'register',msg);
 }
+export function loginAsync(username: string, password: string) : Promise<User> {
+    const msg = JSON.stringify({
+        username,
+        password
+    });
+    return request<User>(Method.PUT, BASE_RUL +'login',msg);
+}
+
 
 export function refreshAsync(token: string) : Promise<User> {
     const msg = JSON.stringify({token});
