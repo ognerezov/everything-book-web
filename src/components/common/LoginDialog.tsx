@@ -1,5 +1,5 @@
 import React,{PureComponent} from "react";
-import {Button, Card, Dialog, FormGroup, Icon, InputGroup, Tooltip} from "@blueprintjs/core";
+import {Button, Callout, Card, Dialog, FormGroup, Icon, InputGroup, Tooltip} from "@blueprintjs/core";
 import {isLoggedIn, User} from "../../model/User";
 import {AppState} from "../../store/configureStore";
 import {ExceptionType, noException} from "../../actions/error";
@@ -120,35 +120,31 @@ class LoginDialog extends PureComponent<LoginDialogProps,LoginDialogState>{
             errorMessage : undefined
         });
     }
-
     getRegistrationStatus=()=>{
+        let icon : IconName | MaybeElement = 'error';
+        let intent : Intent = Intent.DANGER;
+        let content : string = '';
+        if(!this.state.errorMessage && !this.state.invalidEmail && !this.state.notSamePasswords){
+            intent = Intent.PRIMARY;
+            icon  ='info-sign'
+            content = V[register_terms]
+        } else{
+            content = this.state.errorMessage ? this.state.errorMessage :
+                      this.state.invalidEmail ? V[wrong_email_format] :V[password_not_matches]
+        }
         return (
-        <Card className='process-container'>
-            {this.state.errorMessage ?
-                <div className='rule-body error-message'>
-                    {this.state.errorMessage}
-                </div>:
-                this.state.invalidEmail ?
-                    <div className='rule-body error-message'>
-                        {V[wrong_email_format]}
-                    </div> :
-                    this.state.notSamePasswords ?
-                        <div className='rule-body error-message'>
-                            {V[password_not_matches]}
-                        </div>:
-                        <div className='rule-body accent'>
-                            {V[register_terms]}
-                        </div>
-            }
-        </Card>)
+            <Card className='process-container'>
+                <Callout intent={intent} icon={icon}>
+                    {content}
+                </Callout>
+            </Card>)
     }
-
     getLoginErrorStatus=()=>{
         return (this.state.errorMessage ?
             <Card className='process-container'>
-                <div className='rule-body error-message'>
+                <Callout intent={Intent.DANGER} icon='error'>
                     {this.state.errorMessage}
-                </div>
+                </Callout>
             </Card>: null)
     }
 
