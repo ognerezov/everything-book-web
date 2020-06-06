@@ -1,4 +1,4 @@
-import {User} from "../model/User";
+import {isReader, User} from "../model/User";
 import {UserAction, UserActionType, UserObjectAction} from "../actions/user";
 
 export default function (user : User={}, action : UserAction ) : User {
@@ -14,6 +14,9 @@ export default function (user : User={}, action : UserAction ) : User {
             return {...user,username : undefined,token :undefined,refreshToken : undefined};
         case UserActionType.Registered:
             objAction = action as UserObjectAction;
+            if(isReader(objAction.user)){
+                objAction.user.accessCode = objAction.user.token;
+            }
             return {...objAction.user, hasAccess : !!objAction.user.accessCode}
         default:
             return user;

@@ -7,6 +7,8 @@ import {deleteAccessCode, setTemporalPassword} from "../actions/user";
 import {onException,onProcess} from "../actions/error";
 import {saveUser} from "../service/LocalStorage";
 import {setUserLoggedIn} from "../actions/user";
+import {isReader, User} from "../model/User";
+import {refresh} from "./refresh";
 
 export const getChapters =(numbers : number[]): ThunkAction<void, AppState, null, Action> => async (dispatch,getState) => {
     const filtered = numbers.filter(n=>!getState().book[n]);
@@ -33,11 +35,17 @@ export async function proceedGetChapter(numbers : number [],dispatch : any, getS
     try {
         dispatch(gotChapters(await getChaptersAsync(numbers,getState().user.accessCode)));
     }catch (e) {
-        if(e.status === 401 || !getState().user.hasAccess){
-            console.log(getState().user);
-            dispatch(deleteAccessCode());
-            saveUser(getState().user);
-            console.log(getState().user);
+        if(e.status === 401 ){
+            const user : User = getState().user;
+            if(isReader(user)){
+                refresh(()=>{
+                    proceedGetChapter(numbers, dispatch, getState);
+                });
+                return;
+            } else if(!user.hasAccess){
+                dispatch(deleteAccessCode());
+                saveUser(getState().user);
+            }
         } else{
             console.log(e);
         }

@@ -309,7 +309,7 @@ class LoginDialog extends PureComponent<LoginDialogProps,LoginDialogState>{
                 break;
         }
 
-        return <div className='login-button'>
+        return <div className='login-icon'>
             <div className='login-username-text--container' >
                 <Tooltip className='login-username-text' content={content} intent={intent}>
                     <Icon icon={icon} intent={intent} className='login-username-text' iconSize={Icon.SIZE_LARGE} />

@@ -4,9 +4,13 @@
 .login-button{
   flex: 1 0;
 }
+.login-icon{
+  flex: 0 1;
+}
 .login-username-text--container{
   display: table;
   height: 100%;
+  padding-right: 1vw;
 }
 .login-username-text{
   display: table-cell;

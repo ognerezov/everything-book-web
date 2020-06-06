@@ -1,7 +1,7 @@
 import {ThunkAction} from "redux-thunk";
 import {AppState} from "../store/configureStore";
 import {Action} from "redux";
-import {User} from "../model/User";
+import {isReader, User} from "../model/User";
 
 import {registered} from "../actions/user";
 import {saveUser} from "../service/LocalStorage";
@@ -17,7 +17,9 @@ export const refresh =(after : ()=>void): ThunkAction<void, AppState, null, Acti
             return;
         }
         const user : User = await refreshAsync(token);
-        user.accessCode = currentUser.accessCode;
+        if(!isReader(user)) {
+            user.accessCode = currentUser.accessCode;
+        }
         dispatch(registered(user));
         saveUser(getState().user);
     }catch (e) {

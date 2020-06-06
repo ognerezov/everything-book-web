@@ -5,7 +5,7 @@
 .App{
 
 }
-button:focus{
+button, .page-tool--button:focus{
   outline: none;
 }
 .inline {
