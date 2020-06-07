@@ -4,7 +4,7 @@ import {Action} from "redux";
 import {gotChapters} from "../actions/book";
 import {getChaptersAsync} from "../dao/BookRepository";
 import {deleteAccessCode, setTemporalPassword} from "../actions/user";
-import {onException,onProcess} from "../actions/error";
+import {noException, onException, onProcess} from "../actions/error";
 import {saveUser} from "../service/LocalStorage";
 import {setUserLoggedIn} from "../actions/user";
 import {isReader, User} from "../model/User";
@@ -37,8 +37,9 @@ export async function proceedGetChapter(numbers : number [],dispatch : any, getS
     }catch (e) {
         if(e.status === 401 ){
             const user : User = getState().user;
-            if(isReader(user)){
+            if(isReader(user) ){
                 refresh(()=>{
+                    dispatch(noException());
                     proceedGetChapter(numbers, dispatch, getState);
                 });
                 return;

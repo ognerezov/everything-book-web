@@ -320,6 +320,7 @@ class LoginDialog extends PureComponent<LoginDialogProps,LoginDialogState>{
     }
 
     render(){
+        console.log(this.state);
         return<div>
             <Dialog
                 transitionDuration={0}
@@ -374,7 +375,6 @@ class LoginDialog extends PureComponent<LoginDialogProps,LoginDialogState>{
     private handleLoginAttempt =()=>{
        this.props.enterCodeAndGetChapters(this.state.accessCode);
     }
-
 }
 
 const mapStateToProps =(state : AppState)=>({

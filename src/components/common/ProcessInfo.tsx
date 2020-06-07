@@ -22,7 +22,6 @@ const ProcessInfo :FC<ProcessInfoProps> = props => {
                                         icon={viewInfo.icon}
                                         title={V[viewInfo.title]}> {V[viewInfo.message]}</Callout>
     }
-
     return props.error.type === ExceptionType.NoException ? null :
         <Card elevation={Elevation.ZERO} interactive={true} className={props.className}>
             {props.error.type === ExceptionType.Processing ? getProgressBar(): getError(props.error)}

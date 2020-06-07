@@ -6,6 +6,7 @@ import {isReader, User} from "../model/User";
 import {registered} from "../actions/user";
 import {saveUser} from "../service/LocalStorage";
 import {refreshAsync} from "../dao/UserDao";
+import {logout} from "./register";
 
 export const refresh =(after : ()=>void): ThunkAction<void, AppState, null, Action> => async (dispatch,getState) => {
     const currentUser : User = getState().user;
@@ -13,6 +14,7 @@ export const refresh =(after : ()=>void): ThunkAction<void, AppState, null, Acti
     try {
         const token = currentUser.refreshToken;
         if(!token){
+            dispatch(logout());
             after();
             return;
         }

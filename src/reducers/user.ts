@@ -11,7 +11,7 @@ export default function (user : User={}, action : UserAction ) : User {
         case UserActionType.SetLoggedIn:
             return {...user,hasAccess : true};
         case UserActionType.SetLoggedOut:
-            return {...user,username : undefined,token :undefined,refreshToken : undefined};
+            return {...user,username : undefined,token :undefined,refreshToken : undefined, roles :[]};
         case UserActionType.Registered:
             objAction = action as UserObjectAction;
             if(isReader(objAction.user)){
