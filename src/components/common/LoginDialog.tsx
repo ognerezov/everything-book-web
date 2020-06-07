@@ -69,6 +69,7 @@ class LoginDialog extends PureComponent<LoginDialogProps,LoginDialogState>{
     };
 
     handleShowRegistration =()=>{
+        this.props.noException();
         this.setState({...this.state,showRegistration :true, errorMessage : undefined});
     }
 
@@ -77,6 +78,7 @@ class LoginDialog extends PureComponent<LoginDialogProps,LoginDialogState>{
     }
 
     handleShowLogin =()=>{
+        this.props.noException();
         this.setState({...this.state,showLogin :true, errorMessage : undefined});
     }
 
