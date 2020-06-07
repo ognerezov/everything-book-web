@@ -2,12 +2,6 @@ $quotation-width-portrait : 98vw;
 $quotation-width-landscape : 30vw;
 $quotation-margin-landscape : 35vw;
 
-.quotation-button{
-  position: absolute;
-  left: 100%;
-  top: 0;
-  transform: translate(-100%,10%);
-}
 
 @media only screen and (orientation: portrait) {
   .quotation-container--holder{
@@ -25,6 +19,12 @@ $quotation-margin-landscape : 35vw;
   .quotation-content{
     width: $quotation-width-portrait;
     margin: $y-margin 0;
+  }
+  .quotation-button{
+    position: absolute;
+    left: 100%;
+    top: 0;
+    transform: translate(-100%,50%);
   }
 }
 @media only screen and (orientation: landscape) {
@@ -44,5 +44,11 @@ $quotation-margin-landscape : 35vw;
     position: relative;
     width: $quotation-width-landscape;
     margin: $y-margin 0;
+  }
+  .quotation-button{
+    position: absolute;
+    left: 100%;
+    top: 0;
+    transform: translate(-110%,10%);
   }
 }

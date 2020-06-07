@@ -1,5 +1,15 @@
 import React,{PureComponent} from "react";
-import {Button, Callout, Card, Dialog, FormGroup, Icon, InputGroup, Tooltip} from "@blueprintjs/core";
+import {
+    Button,
+    Dialog,
+    FormGroup,
+    Icon,
+    InputGroup,
+    Position,
+    Toast,
+    Toaster,
+    Tooltip
+} from "@blueprintjs/core";
 import {isLoggedIn, User} from "../../model/User";
 import {AppState} from "../../store/configureStore";
 import {ExceptionType, noException} from "../../actions/error";
@@ -41,6 +51,7 @@ interface LoginDialogState {
     showRegistration: boolean;
     showLogin : boolean;
     showPassword : boolean;
+    inputFocused : boolean;
     username ?: string;
     invalidEmail : boolean;
     password ?: string;
@@ -59,7 +70,8 @@ class LoginDialog extends PureComponent<LoginDialogProps,LoginDialogState>{
             showLogin : false,
             showPassword : false,
             invalidEmail : false,
-            notSamePasswords : false
+            notSamePasswords : false,
+            inputFocused : false
         }
         this.props.refresh(this.props.getCurrentChapters);
     }
@@ -94,6 +106,14 @@ class LoginDialog extends PureComponent<LoginDialogProps,LoginDialogState>{
 
     toggleShowPassword=()=>{
         this.setState({...this.state,showPassword : !this.state.showPassword})
+    }
+
+    setFocused=()=>{
+        this.setState({...this.state, inputFocused : true})
+    }
+
+    setNotFocused=()=>{
+        this.setState({...this.state, inputFocused : false})
     }
 
     setUsername=(username : string)=>{
@@ -135,19 +155,16 @@ class LoginDialog extends PureComponent<LoginDialogProps,LoginDialogState>{
                       this.state.invalidEmail ? V[wrong_email_format] :V[password_not_matches]
         }
         return (
-            <Card className='process-container'>
-                <Callout intent={intent} icon={icon}>
-                    {content}
-                </Callout>
-            </Card>)
+            <Toaster position={Position.TOP} >
+                <Toast intent={intent} icon={icon} message={content} />
+            </Toaster>
+        )
     }
     getLoginErrorStatus=()=>{
         return (this.state.errorMessage ?
-            <Card className='process-container'>
-                <Callout intent={Intent.DANGER} icon='error'>
-                    {this.state.errorMessage}
-                </Callout>
-            </Card>: null)
+            <Toaster position={Position.TOP} >
+                <Toast intent={Intent.DANGER} icon='error' message={this.state.errorMessage} />
+            </Toaster> : null)
     }
 
     registrationErrorHandler=(e: ConnectionResponse)=>{
@@ -207,6 +224,8 @@ class LoginDialog extends PureComponent<LoginDialogProps,LoginDialogState>{
                             onChange={(event : React.FormEvent<HTMLInputElement>)=>
                             {this.setRepeatPassword(event.currentTarget.value);
                                 this.props.noException()}}
+                            onFocus={this.setFocused}
+                            onBlur={this.setNotFocused}
                         />
                     </FormGroup>
                 </div>
@@ -246,6 +265,8 @@ class LoginDialog extends PureComponent<LoginDialogProps,LoginDialogState>{
                 className="login-fields"
                 placeholder={V[email]}
                 onChange={(event : React.FormEvent<HTMLInputElement>)=> this.setUsername(event.currentTarget.value)}
+                onFocus={this.setFocused}
+                onBlur={this.setNotFocused}
             />
         </FormGroup>
     }
@@ -262,6 +283,8 @@ class LoginDialog extends PureComponent<LoginDialogProps,LoginDialogState>{
                 onChange={(event : React.FormEvent<HTMLInputElement>)=>
                 {this.setPassword(event.currentTarget.value);
                     this.props.noException()}}
+                onFocus={this.setFocused}
+                onBlur={this.setNotFocused}
             />
         </FormGroup>
     }
@@ -322,7 +345,6 @@ class LoginDialog extends PureComponent<LoginDialogProps,LoginDialogState>{
     }
 
     render(){
-        console.log(this.state);
         return<div>
             <Dialog
                 transitionDuration={0}
@@ -331,7 +353,7 @@ class LoginDialog extends PureComponent<LoginDialogProps,LoginDialogState>{
                 canEscapeKeyClose={false}
                 canOutsideClickClose={false}>
                 {this.state.showRegistration || this.state.showLogin ? null : <ProcessInfo className='process-container'/>}
-                <QuotationViewer />
+                {this.state.inputFocused ? null :<QuotationViewer /> }
                 {this.getRegistrationForm()}
                 {this.getLoginForm()}
                 <div className="bp3-dialog-body">
@@ -348,6 +370,8 @@ class LoginDialog extends PureComponent<LoginDialogProps,LoginDialogState>{
                             onChange={(event : React.FormEvent<HTMLInputElement>)=>
                             {this.setAccessCode(event.currentTarget.value);
                                 this.props.noException()}}
+                            onFocus={this.setFocused}
+                            onBlur={this.setNotFocused}
                         />
                     </FormGroup>
                 </div>
