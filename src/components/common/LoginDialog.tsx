@@ -147,6 +147,9 @@ class LoginDialog extends PureComponent<LoginDialogProps,LoginDialogState>{
         let intent : Intent = Intent.DANGER;
         let content : string = '';
         if(!this.state.errorMessage && !this.state.invalidEmail && !this.state.notSamePasswords){
+            if(this.state.inputFocused){
+                return null;
+            }
             intent = Intent.PRIMARY;
             icon  ='info-sign'
             content = V[register_terms]
