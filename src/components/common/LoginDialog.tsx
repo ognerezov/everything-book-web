@@ -109,6 +109,7 @@ class LoginDialog extends PureComponent<LoginDialogProps,LoginDialogState>{
     }
 
     setFocused=()=>{
+        this.props.noException();
         this.setState({...this.state, inputFocused : true})
     }
 

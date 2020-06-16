@@ -3,7 +3,7 @@ $quotation-width-landscape : 30vw;
 $quotation-margin-landscape : 35vw;
 
 
-@media only screen and (orientation: portrait) {
+//@media only screen and (orientation: portrait) {
   .quotation-container--holder{
     width: $quotation-width-portrait;
   }
@@ -26,8 +26,9 @@ $quotation-margin-landscape : 35vw;
     top: 0;
     transform: translate(-100%,50%);
   }
-}
-@media only screen and (orientation: landscape) {
+//}
+@media (min-width:1023px){
+//@media only screen and (orientation: landscape) {
   .quotation-container--holder{
     width: $quotation-width-landscape;
   }
