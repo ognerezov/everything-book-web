@@ -51,7 +51,6 @@ $close-button-right-landscape : $content-width-portrait + $x-margin-portrait;
   flex: 0 0 10%;
 }
 
-@media only screen and (orientation: portrait) {
   .page{
     width: 100vw;
     height: 100vh;
@@ -83,13 +82,13 @@ $close-button-right-landscape : $content-width-portrait + $x-margin-portrait;
     top: 0;
     height: $tool-height-portrait;
   }
-}
+
 
 $content-width-landscape : 50vw;
 $x-margin-landscape : 25vw;
 $tool-height-landscape : 4vh;
 $close-button-right-landscape : $content-width-landscape + $x-margin-landscape;
-@media only screen and (orientation: landscape) {
+@media (min-width:1023px){
   .page{
     width: 100vw;
     height: $base-height;

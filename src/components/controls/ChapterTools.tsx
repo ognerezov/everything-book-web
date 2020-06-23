@@ -31,6 +31,19 @@ class ChapterTools extends PureComponent<ChapterToolsProps,ChapterToolsState>{
         super(props, context);
         this.state ={extended : false};
     }
+    componentDidMount(){
+        document.body.addEventListener('keydown', this.handleKeyDown);
+    };
+
+    componentWillUnmount() {
+        document.body.removeEventListener('keydown', this.handleKeyDown);
+    };
+
+    handleKeyDown=(event :KeyboardEvent) =>{
+        if (event.code === 'Enter') {
+            this.searchValue();
+        }
+    };
 
     handleExpandAndCollapse=()=>{
       this.setState({...this.state,extended : !this.state.extended});

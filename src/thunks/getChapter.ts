@@ -43,7 +43,7 @@ export async function proceedGetChapter(numbers : number [],dispatch : any, getS
                     proceedGetChapter(numbers, dispatch, getState);
                 });
                 return;
-            } else if(!user.hasAccess){
+            } else {
                 dispatch(deleteAccessCode());
                 saveUser(getState().user);
             }

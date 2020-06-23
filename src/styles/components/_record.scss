@@ -23,7 +23,13 @@ $rule-color : #f7faff;
 }
 $muted-text-color : #5c7080;
 $poem-back-color : #CED9E0;
-.poem{
-  padding: 0.5em 5em 0.5em 5em;
+.poem {
+  padding: 0.5em 1em 0.5em 1em;
   white-space: pre;
+}
+@media (min-width:1023px) {
+  .poem {
+    padding: 0.5em 7em 0.5em 7em;
+    white-space: pre;
+  }
 }

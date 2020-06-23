@@ -7,6 +7,7 @@ import {closeChapter} from "../../thunks/shiftChapter";
 import {connect} from "react-redux";
 import ProcessInfo from "../common/ProcessInfo";
 import ChapterTools from "../controls/ChapterTools";
+import {more_label, V} from "../../vocabulary/Vocabulary";
 
 
 interface BasicChapterViewerProps {
@@ -60,5 +61,5 @@ export const Quotation : FC<BasicChapterViewerProps> = ((props :BasicChapterView
             withTools={false}
             className='quotation-container'
             contentClassName='quotation-content'
-            topButton={<Button icon="step-forward"  minimal={true} className='quotation-button' onClick={props.closeChapter}/>}/>
+            topButton={<Button icon="step-forward"  minimal={true} className='quotation-button' onClick={props.closeChapter}>{V[more_label]} </Button>}/>
     ))

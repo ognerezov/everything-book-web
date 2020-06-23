@@ -25,7 +25,7 @@ export const RecordViewer : FC<RecordViewerProps> = props => {
         return props.record.spans
             .map((span,index)=>span.number ?
                 <N  number={span.text} disabled={isNumberDisabled(props.record,span.text)} key={index}/> :
-                <span key={index}>{span.text}</span> )
+                <span key={index}>{span.text.replace(/\t+/g,'')}</span> )
     }
 
     switch (props.record.type) {

@@ -66,7 +66,8 @@ export const V : Vocabulary={
     email_is_processed: 'Сообщение обрабатывается',
     email_delivered : 'Сообщение доставлено на указанный адрес',
     email_error : 'Ошибка доставки сообщения, проверьте правильность адреса',
-    wrong_username_password : 'Неверный логин или пароль'
+    wrong_username_password : 'Неверный логин или пароль',
+    more_label : 'Ещё'
 };
 
 export const searchNumber = 'searchNumber';
@@ -128,3 +129,5 @@ export const email_is_processed = 'email_is_processed';
 export const email_delivered = 'email_delivered';
 export const email_error = 'email_error';
 export const wrong_username_password ='wrong_username_password';
+export const more_label = 'more_label';
+
