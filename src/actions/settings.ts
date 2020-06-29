@@ -1,4 +1,5 @@
 import {Action} from "redux";
+import {BookOperation} from "./book";
 
 export enum SettingsOperation {
     View = "view",
@@ -8,7 +9,7 @@ export enum SettingsOperation {
     Set = "Set"
 }
 
-export interface SettingsAction extends Action<SettingsOperation>{
+export interface SettingsAction extends Action<SettingsOperation|BookOperation>{
     number : number;
 }
 

@@ -2,7 +2,8 @@ import {Chapter} from "../model/Book";
 import {Action} from "redux";
 
 export enum BookOperation {
-    Get='get'
+    Get='get',
+    Found ='found'
 }
 
 export interface BookAction extends Action<BookOperation>{
@@ -19,5 +20,12 @@ export function gotChapters(chapters: Chapter[]) : BookAction {
    return {
        chapters,
        type : BookOperation.Get
+   }
+}
+
+export function foundChapters(chapters: Chapter[]) : BookAction {
+   return {
+       chapters,
+       type : BookOperation.Found
    }
 }

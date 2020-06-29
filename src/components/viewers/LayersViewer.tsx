@@ -7,18 +7,12 @@ import {Chapter} from "../../model/Book";
 import {isLoggedIn, User} from "../../model/User";
 
 interface LayersViewerProps {
-    layers : number[];
     chapter ?: Chapter;
     getChapters : any;
     user : User;
 }
 
 class LayersViewer extends PureComponent<LayersViewerProps>{
-
-    componentWillUnmount(): void {
-        this.props.getChapters(this.props.layers);
-    }
-
     render() {
         return isLoggedIn(this.props.user) ?<div>
             <ChapterViewer chapter={this.props.chapter} closable={false}/>
@@ -28,6 +22,6 @@ class LayersViewer extends PureComponent<LayersViewerProps>{
 
 const mapStateToProps = (state : AppState)=>{
     const top = state.settings.layers[state.settings.layers.length - 1];
-    return {chapter : state.book[top],layers : state.settings.layers,user : state.user}};
+    return {chapter : state.book[top],user : state.user}};
 
 export default connect(mapStateToProps,{getChapters})(LayersViewer);

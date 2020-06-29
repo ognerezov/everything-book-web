@@ -6,10 +6,19 @@ import {AppState} from "../../store/configureStore";
 import {MAX_CHAPTER, MIN_CHAPTER} from "../../model/Book";
 import {Position} from "@blueprintjs/core/lib/esm/common/position";
 import {isPortrait} from "../../service/MediaInfo";
-import {inputNumber, numberOutOfRange, search, searchNumber, V} from "../../vocabulary/Vocabulary";
+import {
+    inputNumber,
+    no_input_label,
+    numberOutOfRange,
+    search,
+    searchNumber,
+    text_search_label, text_search_placeholder,
+    V
+} from "../../vocabulary/Vocabulary";
 import {toast} from "../../service/toaster";
 import RulesViewer from "../viewers/RulesViewer";
 import {closeChapter} from "../../thunks/shiftChapter";
+import {searchChapters} from "../../thunks/getChapter";
 
 interface ChapterToolsProps {
     nextChapter : any;
@@ -18,11 +27,13 @@ interface ChapterToolsProps {
     number : number;
     layerCount : number;
     closeChapter : any;
+    searchChapters : any;
 }
 
 interface ChapterToolsState {
     extended : boolean;
     searchValue ?:number;
+    searchText ?: string;
 }
 
 class ChapterTools extends PureComponent<ChapterToolsProps,ChapterToolsState>{
@@ -62,6 +73,20 @@ class ChapterTools extends PureComponent<ChapterToolsProps,ChapterToolsState>{
         this.finishJob();
     };
 
+    setSearchText=(searchText : string)=>{
+        this.setState({...this.state,searchText})
+    };
+
+    searchText=()=>{
+        if(this.state.searchText === undefined ) {
+            toast({message : V[no_input_label],icon : 'hand'});
+            return;
+        }
+        this.props.searchChapters(this.state.searchText);
+        this.finishJob();
+    };
+
+
     finishJob=()=>{
         if(isPortrait()){
             this.setState({...this.state,extended : false})
@@ -86,6 +111,20 @@ class ChapterTools extends PureComponent<ChapterToolsProps,ChapterToolsState>{
             </FormGroup>
         );
 
+        const searchTextTool = (
+            <FormGroup
+                label={V[text_search_label]}
+            >
+                <InputGroup
+                    className="login-fields"
+                    placeholder={V[text_search_placeholder]}
+                    rightElement={<Button icon='search' onClick={this.searchText} minimal={true}>{V[search]} </Button>}
+                    onChange={(event : React.FormEvent<HTMLInputElement>)=>
+                    {this.setSearchText(event.currentTarget.value)}}
+                />
+            </FormGroup>
+        );
+
         const extension = (
             this.state.extended ?
             ( isPortrait()?
@@ -93,11 +132,13 @@ class ChapterTools extends PureComponent<ChapterToolsProps,ChapterToolsState>{
                         canOutsideClickClose={true} onClose={this.handleExpandAndCollapse} >
                     <Card interactive={false} elevation={Elevation.TWO} className='extended-tools-container'>
                         {searchTool}
+                        {searchTextTool}
                         <RulesViewer/>
                     </Card>
                 </Drawer> :
                 <Card interactive={false} elevation={Elevation.TWO} className='page-tool-extension'>
                     {searchTool}
+                    {searchTextTool}
                     <RulesViewer/>
                 </Card>)
             :null
@@ -120,4 +161,4 @@ const mapStateToProps =(state : AppState)=>({
     number : state.settings.layers[state.settings.layers.length-1],
     layerCount : state.settings.layers.length});
 
-export default connect(mapStateToProps,{nextChapter,previousChapter,gotoChapter,closeChapter})(ChapterTools);
+export default connect(mapStateToProps,{nextChapter,previousChapter,gotoChapter,closeChapter,searchChapters})(ChapterTools);

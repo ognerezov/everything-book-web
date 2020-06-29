@@ -67,7 +67,10 @@ export const V : Vocabulary={
     email_delivered : 'Сообщение доставлено на указанный адрес',
     email_error : 'Ошибка доставки сообщения, проверьте правильность адреса',
     wrong_username_password : 'Неверный логин или пароль',
-    more_label : 'Ещё'
+    more_label : 'Ещё',
+    no_input_label : 'Поле не должно быть пустым',
+    text_search_label : 'Поиск текста',
+    text_search_placeholder : 'Введите текст'
 };
 
 export const searchNumber = 'searchNumber';
@@ -130,4 +133,6 @@ export const email_delivered = 'email_delivered';
 export const email_error = 'email_error';
 export const wrong_username_password ='wrong_username_password';
 export const more_label = 'more_label';
-
+export const no_input_label = 'no_input_label';
+export const text_search_label = 'text_search_label';
+export const text_search_placeholder = 'text_search_placeholder';
