@@ -51,37 +51,37 @@ $close-button-right-landscape : $content-width-portrait + $x-margin-portrait;
   flex: 0 0 10%;
 }
 
-  .page{
-    width: 100vw;
-    height: 100vh;
-    padding: $tool-height-portrait+$y-margin $x-margin-portrait $y-margin $x-margin-portrait;
-    background-color: $page-color;
-    overflow-y: auto;
-    overflow-x: hidden;
-  }
-  .page-content{
-    width: $content-width-portrait;
-    margin: $y-margin $x-margin-portrait;
-  }
-  .close-button{
-    position: absolute;
-    left: $close-button-right-landscape;
-    top: $y-margin;
-    transform: translate(-100%,50%);
-  }
-  .page-tool{
-    padding: 0 0.2vw 0.2vh 0.2vw;
-    background-color: $page-color;
-    overflow-y: hidden;
-    overflow-x: auto;
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-around;
-    position: fixed;
-    width: 100vw;
-    top: 0;
-    height: $tool-height-portrait;
-  }
+.page{
+  width: 100vw;
+  height: 100vh;
+  padding: $tool-height-portrait+$y-margin $x-margin-portrait $y-margin $x-margin-portrait;
+  background-color: $page-color;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.page-content{
+  width: $content-width-portrait;
+  margin: $y-margin $x-margin-portrait;
+}
+.close-button{
+  position: absolute;
+  left: $close-button-right-landscape;
+  top: $y-margin;
+  transform: translate(-100%,50%);
+}
+.page-tool{
+  padding: 0 0.2vw 0.2vh 0.2vw;
+  background-color: $page-color;
+  overflow-y: hidden;
+  overflow-x: auto;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  position: fixed;
+  width: 100vw;
+  top: 0;
+  height: $tool-height-portrait;
+}
 
 
 $content-width-landscape : 50vw;

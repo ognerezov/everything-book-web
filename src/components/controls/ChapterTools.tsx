@@ -7,11 +7,9 @@ import {MAX_CHAPTER, MIN_CHAPTER} from "../../model/Book";
 import {Position} from "@blueprintjs/core/lib/esm/common/position";
 import {isPortrait} from "../../service/MediaInfo";
 import {
-    inputNumber,
     no_input_label,
     numberOutOfRange,
     search,
-    searchNumber,
     text_search_label, text_search_placeholder,
     V
 } from "../../vocabulary/Vocabulary";
@@ -52,7 +50,7 @@ class ChapterTools extends PureComponent<ChapterToolsProps,ChapterToolsState>{
 
     handleKeyDown=(event :KeyboardEvent) =>{
         if (event.code === 'Enter') {
-            this.searchValue();
+            this.searchText();
         }
     };
 
@@ -73,16 +71,26 @@ class ChapterTools extends PureComponent<ChapterToolsProps,ChapterToolsState>{
         this.finishJob();
     };
 
-    setSearchText=(searchText : string)=>{
-        this.setState({...this.state,searchText})
+    setSearchText=(val : string)=>{
+        const searchText = val.trim();
+        const searchValue : number = Number (searchText);
+        if(isNaN(searchValue)){
+            this.setState({...this.state,searchText,searchValue : undefined})
+            return;
+        }
+        this.setState({...this.state,searchValue, searchText: undefined});
     };
 
     searchText=()=>{
-        if(this.state.searchText === undefined ) {
+        if(this.state.searchText === undefined && this.state.searchValue ===undefined) {
             toast({message : V[no_input_label],icon : 'hand'});
             return;
         }
-        this.props.searchChapters(this.state.searchText);
+        if(this.state.searchText) {
+            this.props.searchChapters(this.state.searchText);
+        } else {
+            this.props.gotoChapter(this.state.searchValue);
+        }
         this.finishJob();
     };
 
@@ -94,22 +102,22 @@ class ChapterTools extends PureComponent<ChapterToolsProps,ChapterToolsState>{
     };
 
     render() {
-        console.log(this.props.number);
-
-        const searchTool = (
-            <FormGroup
-                label={V[searchNumber]}
-            >
-                <InputGroup
-                    className="login-fields"
-                    inputMode='numeric'
-                    placeholder={V[inputNumber]}
-                    rightElement={<Button icon='search' onClick={this.searchValue} minimal={true}>{V[search]} </Button>}
-                    onChange={(event : React.FormEvent<HTMLInputElement>)=>
-                    {this.setSearchValue(Number(event.currentTarget.value))}}
-                />
-            </FormGroup>
-        );
+        // console.log(this.props.number);
+        //
+        // const searchTool = (
+        //     <FormGroup
+        //         label={V[searchNumber]}
+        //     >
+        //         <InputGroup
+        //             className="login-fields"
+        //             inputMode='numeric'
+        //             placeholder={V[inputNumber]}
+        //             rightElement={<Button icon='search' onClick={this.searchValue} minimal={true}>{V[search]} </Button>}
+        //             onChange={(event : React.FormEvent<HTMLInputElement>)=>
+        //             {this.setSearchValue(Number(event.currentTarget.value))}}
+        //         />
+        //     </FormGroup>
+        // );
 
         const searchTextTool = (
             <FormGroup
@@ -131,13 +139,11 @@ class ChapterTools extends PureComponent<ChapterToolsProps,ChapterToolsState>{
                 <Drawer position={Position.LEFT} size={'90%'} isOpen={true}
                         canOutsideClickClose={true} onClose={this.handleExpandAndCollapse} >
                     <Card interactive={false} elevation={Elevation.TWO} className='extended-tools-container'>
-                        {searchTool}
                         {searchTextTool}
                         <RulesViewer/>
                     </Card>
                 </Drawer> :
                 <Card interactive={false} elevation={Elevation.TWO} className='page-tool-extension'>
-                    {searchTool}
                     {searchTextTool}
                     <RulesViewer/>
                 </Card>)

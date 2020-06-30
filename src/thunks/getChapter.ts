@@ -5,7 +5,7 @@ import {foundChapters, gotChapters} from "../actions/book";
 import {getChaptersAsync} from "../dao/BookRepository";
 import {deleteAccessCode, setTemporalPassword, setUserLoggedIn} from "../actions/user";
 import {noException, onException, onProcess} from "../actions/error";
-import {saveUser} from "../service/LocalStorage";
+import {saveSettings, saveUser} from "../service/LocalStorage";
 import {isReader, User} from "../model/User";
 import {refresh} from "./refresh";
 import {getCloudDataAsync} from "../dao/DataRepository";
@@ -65,7 +65,7 @@ export const searchChapters =(text: string): ThunkAction<void, AppState, null, A
     dispatch(onProcess());
     try {
         dispatch(foundChapters(JSON.parse(await getCloudDataAsync(DataType.Search +text,getState().user.accessCode,Method.GET))));
-        saveUser(getState().user);
+        saveSettings(getState().settings);
         dispatch(noException());
     }catch (e) {
         handleException(e, getState, dispatch,() =>searchChapters(text));

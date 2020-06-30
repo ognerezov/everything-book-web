@@ -9,7 +9,9 @@ export default function (settings : Settings = {layers: [1]}, action: SettingsAc
             return settings;
         case SettingsOperation.View:
             layers.push(action.number);
-            return {...settings,layers};
+            return {...settings,layers, selected : undefined};
+        case SettingsOperation.Select:
+            return {...settings,selected :action.number};
         case SettingsOperation.Shift:
             layers[layers.length-1] += action.number;
             return {...settings,layers};
@@ -20,12 +22,11 @@ export default function (settings : Settings = {layers: [1]}, action: SettingsAc
             if(layers.length > 1){
                 layers.pop();
             }
-            return {...settings,layers};
+            return {...settings,layers, selected : undefined};
         case SettingsOperation.Collapse:
-            return {...settings,layers : [layers[0]]};
+            return {...settings,layers : [layers[0]], selected : undefined};
         case BookOperation.Found:
             const  ba : BookAction = action as BookAction;
-            console.log(ba.chapters.map(chapter => chapter.number))
-            return {...settings, layers : ba.chapters.map(chapter => chapter.number)}
+            return {...settings, layers : ba.chapters.map(chapter => chapter.number), selected : undefined}
     }
 }

@@ -8,6 +8,7 @@ import {connect} from "react-redux";
 import ProcessInfo from "../common/ProcessInfo";
 import ChapterTools from "../controls/ChapterTools";
 import {more_label, V} from "../../vocabulary/Vocabulary";
+import StackViewer from "./StackViewer";
 
 
 interface BasicChapterViewerProps {
@@ -49,7 +50,7 @@ export default connect(undefined,{closeChapter})
             withTools={true}
             className='page'
             contentClassName='page-content'
-            topButton={<Button icon={"cross"} intent={Intent.DANGER} minimal={true} className='close-button' onClick={props.closeChapter}/>}
+            topButton={<StackViewer  intent={Intent.PRIMARY}/>}
         />
 ))
 export const Quotation : FC<BasicChapterViewerProps> = ((props :BasicChapterViewerProps) =>

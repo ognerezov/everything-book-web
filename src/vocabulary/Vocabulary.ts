@@ -69,8 +69,8 @@ export const V : Vocabulary={
     wrong_username_password : 'Неверный логин или пароль',
     more_label : 'Ещё',
     no_input_label : 'Поле не должно быть пустым',
-    text_search_label : 'Поиск текста',
-    text_search_placeholder : 'Введите текст'
+    text_search_label : 'Поиск',
+    text_search_placeholder : 'Введите число или текст'
 };
 
 export const searchNumber = 'searchNumber';
