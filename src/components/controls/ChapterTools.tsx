@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 import {AppState} from "../../store/configureStore";
 import {MAX_CHAPTER, MIN_CHAPTER} from "../../model/Book";
 import {Position} from "@blueprintjs/core/lib/esm/common/position";
-import {isPortrait} from "../../service/MediaInfo";
+import {isMobile} from "../../service/MediaInfo";
 import {
     no_input_label,
     numberOutOfRange,
@@ -17,6 +17,7 @@ import {toast} from "../../service/toaster";
 import RulesViewer from "../viewers/RulesViewer";
 import {closeChapter} from "../../thunks/shiftChapter";
 import {searchChapters} from "../../thunks/getChapter";
+import ProcessInfo from "../common/ProcessInfo";
 
 interface ChapterToolsProps {
     nextChapter : any;
@@ -32,6 +33,7 @@ interface ChapterToolsState {
     extended : boolean;
     searchValue ?:number;
     searchText ?: string;
+    processing ?: boolean;
 }
 
 class ChapterTools extends PureComponent<ChapterToolsProps,ChapterToolsState>{
@@ -86,6 +88,7 @@ class ChapterTools extends PureComponent<ChapterToolsProps,ChapterToolsState>{
             toast({message : V[no_input_label],icon : 'hand'});
             return;
         }
+        this.setState({...this.state,processing :true})
         if(this.state.searchText) {
             this.props.searchChapters(this.state.searchText);
         } else {
@@ -96,8 +99,8 @@ class ChapterTools extends PureComponent<ChapterToolsProps,ChapterToolsState>{
 
 
     finishJob=()=>{
-        if(isPortrait()){
-            this.setState({...this.state,extended : false})
+        if(isMobile()){
+            this.setState({...this.state,extended : false, processing : false})
         }
     };
 
@@ -118,16 +121,18 @@ class ChapterTools extends PureComponent<ChapterToolsProps,ChapterToolsState>{
 
         const extension = (
             this.state.extended ?
-            ( isPortrait()?
+            ( isMobile()?
                 <Drawer position={Position.LEFT} size={'90%'} isOpen={true}
                         canOutsideClickClose={true} onClose={this.handleExpandAndCollapse} >
                     <Card interactive={false} elevation={Elevation.TWO} className='extended-tools-container'>
                         {searchTextTool}
+                        {this.state.processing ? <ProcessInfo/> :null }
                         <RulesViewer/>
                     </Card>
                 </Drawer> :
                 <Card interactive={false} elevation={Elevation.TWO} className='page-tool-extension'>
                     {searchTextTool}
+                    {this.state.processing ? <ProcessInfo/> :null }
                     <RulesViewer/>
                 </Card>)
             :null

@@ -17,7 +17,7 @@ interface StackViewerProps {
 
 const StackViewer: FC<StackViewerProps> = props => {
     const layers = props.layers;
-    const selected = props.selected ? -1 : layers.length-1;
+    const selected = props.selected !== undefined ? -1 : layers.length-1;
     return <span className={props.className}>
         {layers.map((layer,index)=>
             <Tag

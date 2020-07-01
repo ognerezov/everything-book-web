@@ -9,8 +9,8 @@ import {proceedGetChapter} from "./getChapter";
 export default (number : number): ThunkAction<void, AppState, null, Action> => async (dispatch,getState) => {
     const book : Book = getState().book;
     dispatch(viewChapter(number));
-    saveSettings(getState().settings);
     if(!book[number]){
         await proceedGetChapter([number],dispatch,getState);
     }
+    saveSettings(getState().settings);
 };

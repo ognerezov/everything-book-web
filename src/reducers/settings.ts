@@ -1,5 +1,5 @@
 import {getSelected, Settings} from "../model/Settings";
-import {SettingsAction, SettingsOperation} from "../actions/settings";
+import {RestoreSettingsAction, SettingsAction, SettingsOperation} from "../actions/settings";
 import {BookAction, BookOperation} from "../actions/book";
 
 export default function (settings : Settings = {layers: [1]}, action: SettingsAction | BookAction) : Settings {
@@ -39,5 +39,8 @@ export default function (settings : Settings = {layers: [1]}, action: SettingsAc
         case BookOperation.Found:
             const  ba : BookAction = action as BookAction;
             return {...settings, layers : ba.chapters.map(chapter => chapter.number), selected : undefined}
+        case SettingsOperation.Restore:
+            const ra :RestoreSettingsAction = action as RestoreSettingsAction;
+            return {...ra.settings}
     }
 }

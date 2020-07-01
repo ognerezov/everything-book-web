@@ -6,10 +6,12 @@ import {connect} from "react-redux";
 import {V} from "../../vocabulary/Vocabulary";
 import {ExceptionViewInfo, getExceptionViewInfo} from "../../model/ExceptionViewInfo";
 import {Elevation} from "@blueprintjs/core/lib/esm/common/elevation";
+import {noException} from "../../actions/error";
 
 interface ProcessInfoProps {
    error : Exception;
    className ?: string;
+   noException : any;
 }
 
 const ProcessInfo :FC<ProcessInfoProps> = props => {
@@ -26,9 +28,10 @@ const ProcessInfo :FC<ProcessInfoProps> = props => {
             content +=': ' +V[viewInfo.message];
         }
         return <Toaster position={Position.TOP} >
-            <Toast  icon={viewInfo.icon} message={content} intent={viewInfo.intent}/>
+            <Toast  icon={viewInfo.icon} message={content} intent={viewInfo.intent} onDismiss={()=>{props.noException()}} />
         </Toaster>
     }
+    console.log(props.error)
     return props.error.type === ExceptionType.NoException ? null :
         props.error.type === ExceptionType.Processing ? getProgressBar(): getError(props.error)
 };
@@ -37,4 +40,4 @@ const mapStateToProps = (state : AppState) =>({
     error : state.error
 });
 
-export default connect(mapStateToProps)(ProcessInfo);
+export default connect(mapStateToProps,{noException})(ProcessInfo);

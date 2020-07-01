@@ -32,7 +32,7 @@ export const enterCodeAndGetChapters =(accessCode : string): ThunkAction<void, A
     }
 };
 
-function handleException(e :any, getState: any, dispatch: any, onRefresh :()=>void ) {
+function handleException(e :any, getState: any, dispatch: any, onRefresh :()=>void,  errorHandler ?:(e: any)=>void ) {
     if (e.status === 401) {
         const user: User = getState().user;
         if (isReader(user)) {
@@ -46,17 +46,22 @@ function handleException(e :any, getState: any, dispatch: any, onRefresh :()=>vo
             saveUser(getState().user);
         }
     } else {
+        errorHandler && errorHandler(e);
         console.log(e);
     }
     dispatch(onException(e.status, e.message));
 }
 
-export async function proceedGetChapter(numbers : number [],dispatch : any, getState : any) {
+export async function proceedGetChapter(numbers : number [],dispatch : any, getState : any, action ?:Action) {
     dispatch(onProcess());
     try {
         dispatch(gotChapters(await getChaptersAsync(numbers,getState().user.accessCode)));
+        if(action) {
+            dispatch(action);
+            saveSettings(getState().settings);
+        }
     }catch (e) {
-        handleException(e, getState, dispatch,() =>proceedGetChapter(numbers, dispatch, getState));
+        handleException(e, getState, dispatch,() =>proceedGetChapter(numbers, dispatch, getState,action));
     }
 }
 
