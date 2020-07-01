@@ -42,7 +42,6 @@ export function setChapter(number :number) :SettingsAction {
         number
     }
 }
-
 export function closeLayer() :SettingsAction {
     return {
         type : SettingsOperation.Close,

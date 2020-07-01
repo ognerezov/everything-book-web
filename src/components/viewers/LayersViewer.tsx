@@ -19,7 +19,7 @@ interface LayersViewerProps {
 class LayersViewer extends PureComponent<LayersViewerProps>{
     render() {
         const top = this.props.layers[this.props.layers.length - 1];
-        const chapter : Chapter = this.props.book[this.props.selected === undefined ? top : this.props.selected]
+        const chapter : Chapter = this.props.book[this.props.selected === undefined ? top : this.props.layers[this.props.selected]]
         return isLoggedIn(this.props.user) ? <div>
             <ChapterViewer chapter={chapter} closable={this.props.inStack}/>
         </div> : null;

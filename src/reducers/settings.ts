@@ -1,9 +1,10 @@
-import {Settings} from "../model/Settings";
+import {getSelected, Settings} from "../model/Settings";
 import {SettingsAction, SettingsOperation} from "../actions/settings";
 import {BookAction, BookOperation} from "../actions/book";
 
 export default function (settings : Settings = {layers: [1]}, action: SettingsAction | BookAction) : Settings {
     let layers : number[]= [...settings.layers];
+    let selected : number | undefined;
     switch (action.type) {
         default:
             return settings;
@@ -13,16 +14,26 @@ export default function (settings : Settings = {layers: [1]}, action: SettingsAc
         case SettingsOperation.Select:
             return {...settings,selected :action.number};
         case SettingsOperation.Shift:
-            layers[layers.length-1] += action.number;
+            selected = getSelected(settings);
+            layers[selected] += action.number;
             return {...settings,layers};
         case SettingsOperation.Set:
-            layers[layers.length-1] = action.number;
+            selected = getSelected(settings)
+            layers[selected] = action.number;
             return {...settings,layers};
         case SettingsOperation.Close:
-            if(layers.length > 1){
-                layers.pop();
+            if(layers.length <= 1){
+               return settings;
             }
-            return {...settings,layers, selected : undefined};
+            if(settings.selected === undefined) {
+                layers.pop();
+                return {...settings, layers};
+            }
+            selected = settings.selected === 0 ? 0 :settings.selected -1;
+            layers = [...settings.layers];
+            layers.splice(settings.selected,1);
+            console.log(layers);
+            return {...settings,layers,selected};
         case SettingsOperation.Collapse:
             return {...settings,layers : [layers[0]], selected : undefined};
         case BookOperation.Found:

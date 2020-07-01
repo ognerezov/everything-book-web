@@ -5,6 +5,7 @@ import {Book} from "../model/Book";
 import {closeLayer, setChapter, shiftChapter} from "../actions/settings";
 import {saveSettings} from "../service/LocalStorage";
 import {proceedGetChapter} from "./getChapter";
+import {getSelectedNumber} from "../model/Settings";
 
 export const nextChapter= (): ThunkAction<void, AppState, null, Action> => async (dispatch,getState) => {
     dispatch(shiftChapter(1));
@@ -23,9 +24,10 @@ export const gotoChapter= (number :number): ThunkAction<void, AppState, null, Ac
 
 export const processBook= (): ThunkAction<void, AppState, null, Action> => async (dispatch,getState) => {
     const book : Book = getState().book;
-    const layers = getState().settings.layers;
     saveSettings(getState().settings);
-    const number = layers[layers.length-1];
+    const number = getSelectedNumber(getState().settings)
+    console.log(number);
+    console.log(getState().settings);
     if(!book[number]){
         await proceedGetChapter([number],dispatch,getState);
     }

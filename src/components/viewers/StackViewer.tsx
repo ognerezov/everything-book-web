@@ -1,8 +1,9 @@
 import React, {FC} from "react";
 import {AppState} from "../../store/configureStore";
 import {connect} from "react-redux";
-import {Intent, ITagProps, Tag} from "@blueprintjs/core";
+import {Intent, Tag} from "@blueprintjs/core";
 import {selectChapter} from "../../actions/settings";
+import {Settings} from "../../model/Settings";
 
 interface StackViewerProps {
     layers : number[],
@@ -11,6 +12,7 @@ interface StackViewerProps {
     intent ?: Intent;
     selectChapter : any;
     selected ?:number;
+    settings : Settings
 }
 
 const StackViewer: FC<StackViewerProps> = props => {
@@ -19,15 +21,13 @@ const StackViewer: FC<StackViewerProps> = props => {
     return <span className={props.className}>
         {layers.map((layer,index)=>
             <Tag
-                className='n-padding'
+                className='n-tag'
                 round={true}
                 key={index}
-                intent={index === selected || layer === props.selected ? props.intent: undefined}
-                minimal={false}
+                intent={index === selected || index === props.selected ? props.intent: undefined}
+                minimal={true}
                 interactive={true}
-                onRemove={(e: React.MouseEvent<HTMLButtonElement>, tagProps: ITagProps)=>{
-                console.log(tagProps)}}
-                onClick={()=>{props.selectChapter(layer)}}
+                onClick={()=>{props.selectChapter(index)}}
             >
             {layer}
         </Tag>)
@@ -35,6 +35,6 @@ const StackViewer: FC<StackViewerProps> = props => {
     </span>;
 }
 
-const mapStateToProps = (state :AppState)=>({layers :state.settings.layers, selected : state.settings.selected});
+const mapStateToProps = (state :AppState)=>({layers :state.settings.layers, selected : state.settings.selected, settings : state.settings});
 
 export default connect(mapStateToProps,{selectChapter})(StackViewer);

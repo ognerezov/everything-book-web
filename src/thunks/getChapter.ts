@@ -58,7 +58,6 @@ export async function proceedGetChapter(numbers : number [],dispatch : any, getS
     }catch (e) {
         handleException(e, getState, dispatch,() =>proceedGetChapter(numbers, dispatch, getState));
     }
-
 }
 
 export const searchChapters =(text: string): ThunkAction<void, AppState, null, Action> => async (dispatch,getState) => {

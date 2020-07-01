@@ -102,23 +102,6 @@ class ChapterTools extends PureComponent<ChapterToolsProps,ChapterToolsState>{
     };
 
     render() {
-        // console.log(this.props.number);
-        //
-        // const searchTool = (
-        //     <FormGroup
-        //         label={V[searchNumber]}
-        //     >
-        //         <InputGroup
-        //             className="login-fields"
-        //             inputMode='numeric'
-        //             placeholder={V[inputNumber]}
-        //             rightElement={<Button icon='search' onClick={this.searchValue} minimal={true}>{V[search]} </Button>}
-        //             onChange={(event : React.FormEvent<HTMLInputElement>)=>
-        //             {this.setSearchValue(Number(event.currentTarget.value))}}
-        //         />
-        //     </FormGroup>
-        // );
-
         const searchTextTool = (
             <FormGroup
                 label={V[text_search_label]}
