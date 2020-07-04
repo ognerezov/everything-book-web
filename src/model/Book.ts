@@ -1,3 +1,6 @@
+import {div, getDividers, getLevel} from "../service/MathService";
+import {number_not_found, V} from "../vocabulary/Vocabulary";
+
 export interface Book {
     [key :number] : Chapter;
 }
@@ -11,7 +14,6 @@ export interface Record extends LevelFragment{
 }
 
 export type RecordFilter = (chapter :Chapter)=>Record[];
-
 
 
 export const quotationRecordFilter : RecordFilter = chapter => {
@@ -52,4 +54,121 @@ export const MAX_CHAPTER = 231;
 export function isNumberDisabled(record : Record, str : string) {
     const number = Number(str);
     return number === record.number || number < MIN_CHAPTER || number > MAX_CHAPTER;
+}
+
+export function buildChapter(number : number) : Chapter {
+    const level = getLevel(number);
+    const dividers : number [] = getDividers(number);
+    let root : number | undefined;
+
+    if (dividers.length % 2 !== 0){
+        root = dividers[div(dividers.length,2)];
+    }
+
+    const res : Chapter = {
+        level,
+        number,
+        type : CHAPTER,
+        records :[]
+    }
+    res.records.push({
+        number,
+        type :CHAPTER,
+        spans : [
+            {
+                text : number + '',
+                number : true,
+            },
+            {
+                text : '. '+V[number_not_found],
+                number : false
+            }
+        ]
+    })
+
+
+    res.records.push({
+        number,
+        type :LEVEL,
+        spans : [
+            {
+                text : 'Число находится на уровне ',
+                number : false,
+            },
+            {
+                text : level +  ' ',
+                number : true
+            }
+        ]
+    })
+
+    if(root){
+        res.records.push({
+            number,
+            type :RULE,
+            spans : [
+                {
+                    text : number + '',
+                    number : true,
+                },
+                {
+                    text : ' = ',
+                    number : true,
+                },
+                {
+                    text : root + '',
+                    number : true,
+                },
+                {
+                    text : ' ^ ',
+                    number : false
+                },
+                {
+                    text : root + '',
+                    number : true,
+                }
+            ]
+        })
+    }
+    for(let i=0; i< dividers.length/2; i++){
+        res.records.push({
+            number,
+            type :RULE,
+            spans : [
+                {
+                    text : number + '',
+                    number : true,
+                },
+                {
+                    text : ' = ',
+                    number : true,
+                },
+                {
+                    text : dividers[dividers.length-1-i] + '',
+                    number : true,
+                },
+                {
+                    text : ' x ',
+                    number : false
+                },
+                {
+                    text : dividers[i] + '',
+                    number : true,
+                }
+            ]
+        })
+    }
+    if(res.records.length === 2){
+        res.records.push({
+            number,
+            type :QUOTATION,
+            spans : [
+                {
+                    text : 'Это простое число - абсолютно новый принцип',
+                    number : false,
+                },
+            ]
+        })
+    }
+    return res;
 }

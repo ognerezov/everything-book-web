@@ -31,7 +31,6 @@ const ProcessInfo :FC<ProcessInfoProps> = props => {
             <Toast  icon={viewInfo.icon} message={content} intent={viewInfo.intent} onDismiss={()=>{props.noException()}} />
         </Toaster>
     }
-    console.log(props.error)
     return props.error.type === ExceptionType.NoException ? null :
         props.error.type === ExceptionType.Processing ? getProgressBar(): getError(props.error)
 };

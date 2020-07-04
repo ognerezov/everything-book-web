@@ -1,11 +1,12 @@
 import {ThunkAction} from "redux-thunk";
 import {AppState} from "../store/configureStore";
 import {Action} from "redux";
-import {Book} from "../model/Book";
+import {Book, buildChapter, MAX_CHAPTER} from "../model/Book";
 import {closeLayer, setChapter, shiftChapter} from "../actions/settings";
 import {saveSettings} from "../service/LocalStorage";
 import {proceedGetChapter} from "./getChapter";
 import {getSelected, getSelectedNumber, Settings} from "../model/Settings";
+import {gotChapters} from "../actions/book";
 
 export const nextChapter= (): ThunkAction<void, AppState, null, Action> => async (dispatch,getState) => {
     dispatch(processBook(
@@ -37,8 +38,15 @@ export const gotoChapter= (number :number): ThunkAction<void, AppState, null, Ac
 };
 
 export const processBook= (settings : Settings, action :Action): ThunkAction<void, AppState, null, Action> => async (dispatch,getState) => {
-    const book : Book = getState().book;
     const number = getSelectedNumber(settings);
+    if(number > MAX_CHAPTER){
+        dispatch(gotChapters([buildChapter(number)]));
+        dispatch(action);
+        saveSettings(getState().settings);
+        return;
+    }
+
+    const book : Book = getState().book;
     saveSettings(getState().settings);
     if(!book[number]){
         await proceedGetChapter([number],dispatch,getState,action);

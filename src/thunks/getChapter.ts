@@ -11,26 +11,45 @@ import {refresh} from "./refresh";
 import {getCloudDataAsync} from "../dao/DataRepository";
 import {DataType} from "../actions/data";
 import {Method} from "../service/connection";
+import {buildChapter, MAX_CHAPTER} from "../model/Book";
 
 export const getChapters =(numbers : number[]): ThunkAction<void, AppState, null, Action> => async (dispatch,getState) => {
-    const filtered = numbers.filter(n=>!getState().book[n]);
+    const filtered = filterAndBuild(numbers,getState,dispatch);
     await proceedGetChapter(filtered,dispatch,getState);
 };
 
 export const getCurrentChapters =(): ThunkAction<void, AppState, null, Action> => async (dispatch,getState) => {
-    const filtered = getState().settings.layers.filter(n=>!getState().book[n]);
+    const filtered = filterAndBuild(getState().settings.layers,getState,dispatch);
     await proceedGetChapter(filtered,dispatch,getState);
 };
 
 export const enterCodeAndGetChapters =(accessCode : string): ThunkAction<void, AppState, null, Action> => async (dispatch,getState) => {
     dispatch(setTemporalPassword(accessCode));
-    const filtered = getState().settings.layers.filter(n=>!getState().book[n]);
+    const filtered = filterAndBuild(getState().settings.layers,getState,dispatch);
     await proceedGetChapter(filtered,dispatch,getState);
     if(getState().user.accessCode) {
         dispatch(setUserLoggedIn());
         saveUser(getState().user);
     }
 };
+
+interface FilteredLayers {
+    toGet : number[],
+    toBuild : number[]
+}
+
+function filterLayers(numbers : number [], getState : any) :FilteredLayers {
+    return {
+        toGet : numbers.filter(n => !getState().book[n] && n <= MAX_CHAPTER),
+        toBuild : numbers.filter(n => n >MAX_CHAPTER)
+    }
+}
+
+function filterAndBuild(numbers : number [], getState : any, dispatch :any) : number []{
+    const layers : FilteredLayers = filterLayers(numbers,getState);
+    dispatch(gotChapters(layers.toBuild.map(n => buildChapter(n))));
+    return layers.toGet;
+}
 
 function handleException(e :any, getState: any, dispatch: any, onRefresh :()=>void,  errorHandler ?:(e: any)=>void ) {
     if (e.status === 401) {

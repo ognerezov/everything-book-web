@@ -70,7 +70,9 @@ export const V : Vocabulary={
     more_label : 'Ещё',
     no_input_label : 'Поле не должно быть пустым',
     text_search_label : 'Поиск',
-    text_search_placeholder : 'Введите число или текст'
+    text_search_placeholder : 'Введите число или текст',
+    goto_start_label : 'В начало книги',
+    number_not_found : 'Этого числа еще нет в книге'
 };
 
 export const searchNumber = 'searchNumber';
@@ -136,3 +138,5 @@ export const more_label = 'more_label';
 export const no_input_label = 'no_input_label';
 export const text_search_label = 'text_search_label';
 export const text_search_placeholder = 'text_search_placeholder';
+export const goto_start_label = 'goto_start_label';
+export const number_not_found = 'number_not_found';

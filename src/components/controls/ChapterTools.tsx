@@ -7,6 +7,7 @@ import {MAX_CHAPTER, MIN_CHAPTER} from "../../model/Book";
 import {Position} from "@blueprintjs/core/lib/esm/common/position";
 import {isMobile} from "../../service/MediaInfo";
 import {
+    goto_start_label,
     no_input_label,
     numberOutOfRange,
     search,
@@ -106,6 +107,10 @@ class ChapterTools extends PureComponent<ChapterToolsProps,ChapterToolsState>{
 
     render() {
         const searchTextTool = (
+            <div>
+            <Button icon='home' onClick={()=>{this.props.gotoChapter(1)}} className='tools-home-button' minimal={true} intent={Intent.PRIMARY}>
+                {V[goto_start_label]}
+            </Button>
             <FormGroup
                 label={V[text_search_label]}
             >
@@ -117,6 +122,7 @@ class ChapterTools extends PureComponent<ChapterToolsProps,ChapterToolsState>{
                     {this.setSearchText(event.currentTarget.value)}}
                 />
             </FormGroup>
+            </div>
         );
 
         const extension = (
@@ -144,7 +150,7 @@ class ChapterTools extends PureComponent<ChapterToolsProps,ChapterToolsState>{
             <Button className='page-tool--button' minimal={true} icon='arrow-left' onClick={this.props.previousChapter}
                     disabled={this.props.number <= MIN_CHAPTER}/>
             <Button className='page-tool--button' minimal={true} icon='arrow-right' onClick={this.props.nextChapter}
-                    disabled={this.props.number >= MAX_CHAPTER}/>
+                   />
             <Button className='page-tool-menu-button' minimal={true} icon='cross' onClick={this.props.closeChapter}
                     intent={this.props.layerCount ===1 ? Intent.NONE : Intent.DANGER} disabled={this.props.layerCount ===1}/>
         </div>

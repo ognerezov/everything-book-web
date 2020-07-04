@@ -2,6 +2,7 @@ import {getSelected, Settings} from "../model/Settings";
 import {RestoreSettingsAction, SettingsAction, SettingsOperation} from "../actions/settings";
 import {BookAction, BookOperation} from "../actions/book";
 
+
 export default function (settings : Settings = {layers: [1]}, action: SettingsAction | BookAction) : Settings {
     let layers : number[]= [...settings.layers];
     let selected : number | undefined;
@@ -18,9 +19,7 @@ export default function (settings : Settings = {layers: [1]}, action: SettingsAc
             layers[selected] += action.number;
             return {...settings,layers};
         case SettingsOperation.Set:
-            selected = getSelected(settings)
-            layers[selected] = action.number;
-            return {...settings,layers};
+            return {...settings,layers : [action.number], selected : undefined};
         case SettingsOperation.Close:
             if(layers.length <= 1){
                return settings;
