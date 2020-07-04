@@ -60,6 +60,7 @@ export async function proceedGetChapter(numbers : number [],dispatch : any, getS
             dispatch(action);
             saveSettings(getState().settings);
         }
+        dispatch(noException());
     }catch (e) {
         handleException(e, getState, dispatch,() =>proceedGetChapter(numbers, dispatch, getState,action));
     }
