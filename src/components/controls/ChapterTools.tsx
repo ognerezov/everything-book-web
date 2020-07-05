@@ -108,7 +108,10 @@ class ChapterTools extends PureComponent<ChapterToolsProps,ChapterToolsState>{
     render() {
         const searchTextTool = (
             <div>
-            <Button icon='home' onClick={()=>{this.props.gotoChapter(1)}} className='tools-home-button' minimal={true} intent={Intent.PRIMARY}>
+            <Button icon='home' className='tools-home-button' minimal={true} intent={Intent.PRIMARY}
+                    onClick={()=>{
+                        this.props.gotoChapter(1);
+                        this.finishJob();}} >
                 {V[goto_start_label]}
             </Button>
             <FormGroup

@@ -124,12 +124,13 @@ export function buildChapter(number : number) : Chapter {
                     number : false
                 },
                 {
-                    text : root + '',
+                    text : 2 + '',
                     number : true,
                 }
             ]
         })
     }
+
     for(let i=0; i< dividers.length/2; i++){
         res.records.push({
             number,
