@@ -2,6 +2,9 @@
 .auto-margin{
   margin: auto;
 }
+.auto-margin-x{
+  margin: 0 auto;
+}
 .App{
 
 }
@@ -112,7 +115,7 @@ $close-button-right-landscape : $content-width-landscape + $x-margin-landscape;
     flex-flow: row nowrap;
     justify-content: flex-start;
     width: $content-width-landscape;
-    margin: 0 $x-margin-portrait ;
+    margin: 0 $x-margin-portrait;
     height: $tool-height-landscape ;
     top: 0;
     position: fixed;

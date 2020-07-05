@@ -72,9 +72,21 @@ export const V : Vocabulary={
     text_search_label : 'Поиск',
     text_search_placeholder : 'Введите число или текст',
     goto_start_label : 'В начало книги',
-    number_not_found : 'Этого числа еще нет в книге'
+    number_not_found : 'Этого числа еще нет в книге',
+    message_support_label : 'Связь с администрацией',
+    quotations_label : 'Цитаты',
+    expand_label : 'Развернуть',
+    send_label : 'Отправить',
+    theme_label : 'Тема письма',
+    message_label : 'Текст письма',
+    empty_message_label : 'Нечего отправлять',
+    message_was_sent : 'Письмо отправлено'
 };
 
+export const message_was_sent = 'message_was_sent';
+export const theme_label = 'theme_label';
+export const message_label = 'message_label';
+export const empty_message_label = 'empty_message_label';
 export const searchNumber = 'searchNumber';
 export const inputNumber = 'inputNumber';
 export const search = 'search';
@@ -140,3 +152,7 @@ export const text_search_label = 'text_search_label';
 export const text_search_placeholder = 'text_search_placeholder';
 export const goto_start_label = 'goto_start_label';
 export const number_not_found = 'number_not_found';
+export const message_support_label = 'message_support_label';
+export const quotations_label = 'quotations_label';
+export const expand_label = 'expand_label';
+export const send_label ='send_label';

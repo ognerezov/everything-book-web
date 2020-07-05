@@ -2,7 +2,6 @@ $process-width-portrait : 98vw;
 $process-width-landscape : 30vw;
 $process-margin-landscape : 35vw;
 
-//@media only screen and (orientation: portrait) {
   .process-container--holder{
     width: $process-width-portrait;
   }
@@ -14,7 +13,6 @@ $process-margin-landscape : 35vw;
     width: $process-width-portrait;
   }
 @media (min-width:1023px){
-//@media only screen and (orientation: landscape) {
   .process-container--holder{
     width: $process-width-landscape;
   }

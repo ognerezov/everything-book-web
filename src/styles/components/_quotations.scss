@@ -24,7 +24,21 @@ $quotation-margin-landscape : 35vw;
     top: 0;
     transform: translate(-100%,50%);
   }
-
+  .quotation-button--expand{
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform: translate(10%,50%);
+  }
+  .quotation-button-fullscreen{
+    position: absolute;
+    left: 100%;
+    transform: translate(-110%,-50%);
+  }
+  .quotation--fullscreen{
+    margin: 0 auto;
+    width: 50vw;
+  }
 @media (min-width:1023px){
   .quotation-container--holder{
     width: $quotation-width-landscape;
@@ -48,5 +62,11 @@ $quotation-margin-landscape : 35vw;
     left: 100%;
     top: 0;
     transform: translate(-110%,10%);
+  }
+  .quotation-button--expand{
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform: translate(10%,10%);
   }
 }

@@ -10,7 +10,7 @@ import {
     Toaster,
     Tooltip
 } from "@blueprintjs/core";
-import {isLoggedIn, User} from "../../model/User";
+import {hasReadAccess, User} from "../../model/User";
 import {AppState} from "../../store/configureStore";
 import {ExceptionType, noException} from "../../actions/error";
 import {connect} from "react-redux";
@@ -35,6 +35,7 @@ import {getCurrentChapters} from "../../thunks/getChapter";
 import {refresh} from "../../thunks/refresh";
 import {IconName} from "@blueprintjs/icons";
 import {MaybeElement} from "@blueprintjs/core/src/common/props";
+import ContactSupportTool from "../controls/ContactSupportTool";
 
 interface LoginDialogProps {
     user : User;
@@ -353,7 +354,7 @@ class LoginDialog extends PureComponent<LoginDialogProps,LoginDialogState>{
             <Dialog
                 transitionDuration={0}
                 className='process-container--holder'
-                isOpen={!isLoggedIn(this.props.user)}
+                isOpen={!hasReadAccess(this.props.user)}
                 canEscapeKeyClose={false}
                 canOutsideClickClose={false}>
                 {this.state.showRegistration || this.state.showLogin ? null : <ProcessInfo className='process-container'/>}
@@ -399,6 +400,7 @@ class LoginDialog extends PureComponent<LoginDialogProps,LoginDialogState>{
                     </div>}
 
                 </div>
+                <ContactSupportTool/>
             </Dialog>
         </div>
     }

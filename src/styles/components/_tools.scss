@@ -11,3 +11,27 @@
   width: 100%;
   text-align: center;
 }
+.message-button--login-screen{
+  position: fixed;
+  top : 0;
+  margin: $y-margin $x-margin-portrait;
+  width: $process-width-portrait;
+}
+.message-window--colors{
+  background-color: $blue2;
+  color: white;
+}
+.message-window--input-field{
+  margin-top: 0.5vh;
+}
+
+@media (min-width:1023px){
+
+  .message-button--login-screen{
+    position: fixed;
+    top : 0;
+    left: 0;
+    margin: $y-margin $process-margin-landscape;
+    width: $process-width-landscape;
+  }
+}

@@ -7,7 +7,7 @@ import {closeChapter} from "../../thunks/shiftChapter";
 import {connect} from "react-redux";
 import ProcessInfo from "../common/ProcessInfo";
 import ChapterTools from "../controls/ChapterTools";
-import {more_label, V} from "../../vocabulary/Vocabulary";
+import {expand_label, more_label, V} from "../../vocabulary/Vocabulary";
 import StackViewer from "./StackViewer";
 
 
@@ -15,6 +15,7 @@ interface BasicChapterViewerProps {
     chapter ?: Chapter;
     closable ?: boolean;
     closeChapter : any;
+    expandView ?: ()=>void;
 }
 
 interface ChapterViewerProps extends BasicChapterViewerProps{
@@ -62,5 +63,17 @@ export const Quotation : FC<BasicChapterViewerProps> = ((props :BasicChapterView
             withTools={false}
             className='quotation-container'
             contentClassName='quotation-content'
-            topButton={<Button icon="step-forward"  minimal={true} className='quotation-button' onClick={props.closeChapter}>{V[more_label]} </Button>}/>
+            topButton={<div>
+                <Button icon="step-forward"  minimal={true} className='quotation-button' onClick={props.closeChapter}>{V[more_label]} </Button>
+                <Button icon="expand-all"  minimal={true} className='quotation-button--expand' onClick={props.expandView} intent={Intent.PRIMARY}>{V[expand_label]} </Button>
+            </div>}/>
+    ))
+export const QuotationFullScreen : FC<BasicChapterViewerProps> = ((props :BasicChapterViewerProps) =>
+    (<ChapterViewer
+            recordFilter={quotationRecordFilter}
+            closeChapter={props.closeChapter}
+            chapter={props.chapter}
+            closable={props.closable}
+            withTools={false}
+            topButton={<Button icon="step-forward"  minimal={true} className='quotation-button-fullscreen' onClick={props.closeChapter}>{V[more_label]} </Button>}/>
     ))

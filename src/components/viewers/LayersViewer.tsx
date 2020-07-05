@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import ChapterViewer from "./ChapterViewer";
 import {getChapters} from "../../thunks/getChapter";
 import {Book, Chapter} from "../../model/Book";
-import {isLoggedIn, User} from "../../model/User";
+import {hasReadAccess, User} from "../../model/User";
 
 interface LayersViewerProps {
     book : Book;
@@ -20,7 +20,7 @@ class LayersViewer extends PureComponent<LayersViewerProps>{
     render() {
         const top = this.props.layers[this.props.layers.length - 1];
         const chapter : Chapter = this.props.book[this.props.selected === undefined ? top : this.props.layers[this.props.selected]]
-        return isLoggedIn(this.props.user) ? <div>
+        return hasReadAccess(this.props.user) ? <div>
             <ChapterViewer chapter={chapter} closable={this.props.inStack}/>
         </div> : null;
     }
