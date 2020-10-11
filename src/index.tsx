@@ -8,6 +8,7 @@ import {store} from "./store/configureStore";
 import { Provider } from 'react-redux';
 import Privacy from "./components/common/Privacy"
 import {BrowserRouter, Route, Switch} from "react-router-dom";
+import {ContactPage} from "./components/controls/ContactSupportTool";
 
 ReactDOM.render(
     <Provider store={store}>
@@ -15,7 +16,7 @@ ReactDOM.render(
             <Switch>
                 <Route exact={true} path='/' component={App}/>
                 <Route path="/privacy" component={Privacy} />
-                <Route path="/contacts" component={Privacy} />
+                <Route path="/contacts" component={ContactPage} />
             </Switch>
         </BrowserRouter>
     </Provider>,

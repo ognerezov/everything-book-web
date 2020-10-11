@@ -80,7 +80,8 @@ export const V : Vocabulary={
     theme_label : 'Тема письма',
     message_label : 'Текст письма',
     empty_message_label : 'Нечего отправлять',
-    message_was_sent : 'Письмо отправлено'
+    message_was_sent : 'Письмо отправлено',
+    contact_label : 'Связаться с разработчиками'
 };
 
 export const message_was_sent = 'message_was_sent';
@@ -156,3 +157,4 @@ export const message_support_label = 'message_support_label';
 export const quotations_label = 'quotations_label';
 export const expand_label = 'expand_label';
 export const send_label ='send_label';
+export const contact_label = 'contact_label';

@@ -17,3 +17,15 @@ export const sendMessage=(message : string, theme : string| undefined = undefine
     }
     dispatch(noException());
 };
+
+export const pubMessage=(message : string, email : string,  onSuccess :()=>void, onError :(e :any)=>void): ThunkAction<void, AppState, null, Action> => async (dispatch,getState) => {
+    dispatch(onProcess());
+    try {
+        await post(getBaseUrl()+DataType.PubMessage,JSON.stringify({message,email}),undefined);
+        onSuccess();
+    }catch (e) {
+        console.log(e);
+        onError(e);
+    }
+    dispatch(noException());
+};
