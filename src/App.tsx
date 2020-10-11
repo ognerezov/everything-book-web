@@ -5,7 +5,6 @@ import LoginDialog from "./components/common/LoginDialog";
 interface AppProps {
 
 }
-
 const App :FC<AppProps>=props =>  {
   return (
     <div className="App">

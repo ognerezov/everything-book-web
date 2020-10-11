@@ -11,6 +11,14 @@
 button:focus, .page-tool--button:focus,.page-tool-menu-button:focus, .page-tool-cross:focus, .tools-home-button:focus{
   outline: none;
 }
+
+pre {
+  white-space: pre-wrap;       /* Since CSS 2.1 */
+  white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+  white-space: -o-pre-wrap;    /* Opera 7 */
+  word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+
 .inline {
   display: inline-block;
 }
