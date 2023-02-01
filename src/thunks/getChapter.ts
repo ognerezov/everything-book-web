@@ -11,7 +11,7 @@ import {refresh} from "./refresh";
 import {getCloudDataAsync} from "../dao/DataRepository";
 import {DataType} from "../actions/data";
 import {Method} from "../service/connection";
-import {buildChapter, MAX_CHAPTER} from "../model/Book";
+import {buildChapter} from "../model/Book";
 
 export const getChapters =(numbers : number[]): ThunkAction<void, AppState, null, Action> => async (dispatch,getState) => {
     const filtered = filterAndBuild(numbers,getState,dispatch);
@@ -40,8 +40,8 @@ interface FilteredLayers {
 
 function filterLayers(numbers : number [], getState : any) :FilteredLayers {
     return {
-        toGet : numbers.filter(n => !getState().book[n] && n <= MAX_CHAPTER),
-        toBuild : numbers.filter(n => n >MAX_CHAPTER)
+        toGet : numbers.filter(n => !getState().book[n] && n <= getState().data.max),
+        toBuild : numbers.filter(n => n >getState().data.max)
     }
 }
 

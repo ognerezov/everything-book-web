@@ -3,11 +3,11 @@ import {Button, Card, Drawer, Elevation, FormGroup, InputGroup, Intent} from "@b
 import {nextChapter,previousChapter,gotoChapter} from "../../thunks/shiftChapter";
 import {connect} from "react-redux";
 import {AppState} from "../../store/configureStore";
-import {MAX_CHAPTER, MIN_CHAPTER} from "../../model/Book";
+import {MIN_CHAPTER} from "../../model/Book";
 import {Position} from "@blueprintjs/core/lib/esm/common/position";
 import {isMobile} from "../../service/MediaInfo";
 import {
-    goto_start_label,
+    goto_start_label, message_support_label,
     no_input_label,
     numberOutOfRange,
     search,
@@ -66,7 +66,7 @@ class ChapterTools extends PureComponent<ChapterToolsProps,ChapterToolsState>{
     };
 
     searchValue=()=>{
-        if(this.state.searchValue === undefined ||  MIN_CHAPTER > this.state.searchValue || this.state.searchValue > MAX_CHAPTER) {
+        if(this.state.searchValue === undefined ||  MIN_CHAPTER > this.state.searchValue ) {
             toast({message : V[numberOutOfRange],icon : 'hand'});
             return;
         }
@@ -137,12 +137,28 @@ class ChapterTools extends PureComponent<ChapterToolsProps,ChapterToolsState>{
                         {searchTextTool}
                         {this.state.processing ? <ProcessInfo/> :null }
                         <RulesViewer/>
+                        <a href={'/contacts'} target={'_blank'} rel="noopener noreferrer">
+                            <Button
+                                icon='envelope'
+                                minimal={true}
+                                intent={Intent.PRIMARY}>
+                                {V[message_support_label]}
+                            </Button>
+                        </a>
                     </Card>
                 </Drawer> :
                 <Card interactive={false} elevation={Elevation.TWO} className='page-tool-extension'>
                     {searchTextTool}
                     {this.state.processing ? <ProcessInfo/> :null }
                     <RulesViewer/>
+                    <a href={'/contacts'} target={'_blank'} rel="noopener noreferrer">
+                        <Button
+                            icon='envelope'
+                            minimal={true}
+                            intent={Intent.PRIMARY}>
+                            {V[message_support_label]}
+                        </Button>
+                    </a>
                 </Card>)
             :null
         );

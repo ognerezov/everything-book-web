@@ -36,6 +36,9 @@ import {refresh} from "../../thunks/refresh";
 import {IconName} from "@blueprintjs/icons";
 import {MaybeElement} from "@blueprintjs/core/src/common/props";
 import ContactSupportTool from "../controls/ContactSupportTool";
+import {isMobile} from "../../service/MediaInfo";
+import {getData} from "../../thunks/getData";
+import {DataType} from "../../actions/data";
 
 interface LoginDialogProps {
     user : User;
@@ -45,6 +48,7 @@ interface LoginDialogProps {
     getCurrentChapters :any;
     refresh : any;
     logout : any;
+    getData : any;
 }
 
 interface LoginDialogState {
@@ -74,6 +78,7 @@ class LoginDialog extends PureComponent<LoginDialogProps,LoginDialogState>{
             notSamePasswords : false,
             inputFocused : false
         }
+        this.props.getData(DataType.Max);
         this.props.refresh(this.props.getCurrentChapters);
     }
 
@@ -149,7 +154,7 @@ class LoginDialog extends PureComponent<LoginDialogProps,LoginDialogState>{
         let intent : Intent = Intent.DANGER;
         let content : string = '';
         if(!this.state.errorMessage && !this.state.invalidEmail && !this.state.notSamePasswords){
-            if(this.state.inputFocused){
+            if(this.state.inputFocused && isMobile()){
                 return null;
             }
             intent = Intent.PRIMARY;
@@ -413,4 +418,4 @@ const mapStateToProps =(state : AppState)=>({
     user : state.user
 });
 
-export default connect(mapStateToProps,{noException,enterCodeAndGetChapters,register,getCurrentChapters,refresh,logout})(LoginDialog)
+export default connect(mapStateToProps,{noException,enterCodeAndGetChapters,register,getCurrentChapters,refresh,logout,getData})(LoginDialog)

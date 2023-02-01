@@ -5,7 +5,8 @@ export enum DataType {
     Quotations = "free/quotations",
     Search = 'book/search/',
     Message = 'usr/message',
-    PubMessage = 'pub/contact'
+    PubMessage = 'pub/contact',
+    Max = 'free/max'
 }
 
 export interface DataAction extends Action<DataType>{

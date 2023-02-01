@@ -1,7 +1,6 @@
 import { Method, sendAsync} from "../service/connection";
 import {getBaseUrl} from "../api/BackendUrl";
 
-//export const BASE_URL ='https://europe-west3-everything-book.cloudfunctions.net/';
 export const BASE_URL =getBaseUrl();
 
 

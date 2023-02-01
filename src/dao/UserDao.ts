@@ -7,7 +7,8 @@ export const BASE_RUL=getUrl('pub/');
 export function registerAsync(username: string, password: string) : Promise<User> {
     const msg = JSON.stringify({
         username,
-        password
+        password,
+        'app' : 'web'
     });
     return request<User>(Method.POST, BASE_RUL +'register',msg);
 }

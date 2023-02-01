@@ -73,7 +73,7 @@ export const V : Vocabulary={
     text_search_placeholder : 'Введите число или текст',
     goto_start_label : 'В начало книги',
     number_not_found : 'Этого числа еще нет в книге',
-    message_support_label : 'Связь с администрацией',
+    message_support_label : 'Связь с автором',
     quotations_label : 'Цитаты',
     expand_label : 'Развернуть',
     send_label : 'Отправить',
@@ -81,7 +81,7 @@ export const V : Vocabulary={
     message_label : 'Текст письма',
     empty_message_label : 'Нечего отправлять',
     message_was_sent : 'Письмо отправлено',
-    contact_label : 'Связаться с разработчиками'
+    contact_label : 'Связаться с автором'
 };
 
 export const message_was_sent = 'message_was_sent';

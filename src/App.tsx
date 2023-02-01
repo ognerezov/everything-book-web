@@ -1,15 +1,14 @@
 import React,{FC} from 'react';
-import LayersViewer from "./components/viewers/LayersViewer";
-import LoginDialog from "./components/common/LoginDialog";
+import BookViewer from "./components/viewers/BookViewer";
 
 interface AppProps {
 
 }
-const App :FC<AppProps>=props =>  {
+const App :FC<AppProps>=() =>  {
   return (
     <div className="App">
-      <LayersViewer/>
-      <LoginDialog/>
+      <BookViewer/>
+      {/*<LoginDialog/>*/}
     </div>
   );
 };

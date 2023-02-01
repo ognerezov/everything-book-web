@@ -31,7 +31,7 @@ function init() :AppState {
         book : {},
         error : noException(),
         user,
-        data :{}
+        data :{'max': 0}
     }
 }
 

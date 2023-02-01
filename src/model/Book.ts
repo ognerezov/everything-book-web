@@ -9,6 +9,32 @@ export interface Chapter extends LevelFragment{
     records : Record[];
 }
 
+export function getMeta(chapter : Chapter){
+        let title = chapter.number + ''
+        let description = ''
+        for(const record of chapter.records){
+            if(record.type === CHAPTER){
+                title = record.spans.map(span=>span.text).join('')
+                continue
+            }
+            if(record.type === FORMULA){
+                description += record.spans.filter((span, index)=> index >4).map(span=>span.text.replace(/\t+/g,'')).join('')
+            }
+
+        }
+
+        return {
+            title: title,
+            description: description,
+            meta: {
+                charset: 'utf-8',
+                name: {
+                    keywords: title.split(/[.,–]/g)
+                }
+            }
+        }
+}
+
 export interface Record extends LevelFragment{
     spans : Span [];
 }
@@ -49,11 +75,10 @@ export const REGULAR = 'regular';
 export const RESULT = 'result';
 
 export const MIN_CHAPTER = 1;
-export const MAX_CHAPTER = 231;
 
 export function isNumberDisabled(record : Record, str : string) {
     const number = Number(str);
-    return number === record.number || number < MIN_CHAPTER || number > MAX_CHAPTER;
+    return number === record.number || number < MIN_CHAPTER
 }
 
 export function buildChapter(number : number) : Chapter {

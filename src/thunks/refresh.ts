@@ -10,7 +10,7 @@ import {logout} from "./register";
 
 export const refresh =(after : ()=>void): ThunkAction<void, AppState, null, Action> => async (dispatch,getState) => {
     const currentUser : User = getState().user;
-    if(!currentUser) return ;
+    if(!currentUser) return;
     try {
         const token = currentUser.refreshToken;
         if(!token){
