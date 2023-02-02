@@ -41,8 +41,8 @@ export function request<T>(method : Method, url : string, message : BodyInit|und
 export function sendAsync(method : Method, url : string, message : BodyInit|undefined = undefined,
                           auth : string|undefined = undefined, contentType : string = DEFAULT_CONTENT_TYPE,
                           timeout : number = DEFAULT_TIME_OUT): Promise<ConnectionResponse> {
-    console.log(url);
-    console.log(message);
+    // console.log(url);
+    // console.log(message);
     return new Promise(function (resolve, reject) {
         const xhttp = new XMLHttpRequest();
         xhttp.open(Method[method], url, true);

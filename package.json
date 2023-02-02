@@ -33,11 +33,14 @@
   },
   "scripts": {
     "build:css": "node-sass src/ -o src/ ",
+    "mbuild:css": "node-sass src/ -o src/ ",
     "watch:css": "npm run build:css  && node-sass src/ -o src/ -w -r",
     "start:js": "react-scripts start",
     "start": "npm-run-all -p watch:css start:js",
-    "build:js": "react-scripts build",
+    "build:js": "GENERATE_SOURCEMAP=false react-scripts build",
+    "mbuild:js": "react-scripts build",
     "build": "npm-run-all build:*",
+    "mbuild": "npm-run-all mbuild:*",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "postbuild": "react-snap"

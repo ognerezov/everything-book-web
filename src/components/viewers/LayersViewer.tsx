@@ -39,7 +39,6 @@ class LayersViewer extends PureComponent<LayersViewerProps>{
         const top = this.props.layers[this.props.layers.length - 1];
         const chapter : Chapter = this.props.book[this.props.selected === undefined ? top : this.props.layers[this.props.selected]]
 
-        console.log(chapter)
         if(!chapter){
             return null
         }

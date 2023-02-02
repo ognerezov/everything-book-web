@@ -28,10 +28,19 @@ function NumberViewer(props : NumberViewerProps){
 
     useEffect(()=>{
         if(!props.max){
+            return
+        }
+
+        if(!props.match.params.id){
             return;
         }
-        const num = props.match.params.id ? parseInt(props.match.params.id) : undefined
-        console.log(num)
+
+        let num = parseInt(props.match.params.id)
+
+        if(isNaN(num)){
+            num = 404
+        }
+
         if(!num){
             return
         }
